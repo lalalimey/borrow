@@ -29,6 +29,10 @@
                         <th scope="col" class="fit">วันที่ยืม</th>
                         <th scope="col" class="fit">วันที่คืน</th>
                         <th scope="col" class="fit">สถานะ</th>
+                        <th style="display: none">ชื่อผู้ยืม</th>
+                        <th style="display: none">ชั้นปี</th>
+                        <th style="display: none">ID Line</th>
+                        <th style="display: none">เบอร์โทรศัพท์มือถือ</th>
                         <th scope="col" class="fit"></th>
                         <th scope="col" class="fit"></th>
                     </tr>
@@ -39,6 +43,9 @@
                 @endphp
                 <tbody>
                     @foreach($logs as $log)
+                        @php
+                            $user = \App\Models\User::find($log->user_id)
+                        @endphp
                         <tr class="mainList" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <td class="fit">{{ $log->id }}</td>
                             <td style="display: none" id="JSONlogItemList">{{ $log->item_list }}</td>
@@ -46,6 +53,10 @@
                             <td class="fit">{{ $log->borrow_date }}</td>
                             <td class="fit">{{ $log->due_date }}</td>
                             <td class="fit">{{ $log->status }}</td>
+                            <td style="display: none">{{$user->name}}</td>
+                            <td style="display: none"></td>
+                            <td style="display: none">{{$user->line_id}}</td>
+                            <td style="display: none">{{$user->phone}}</td>
                             <td class="fit">
 
                                 <button type="button" class="btn btn-outline float-end" id="{{ 'buttonInfoModal' .  $log->id }}" data-bs-toggle="modal" data-bs-target="#infoModal">
@@ -115,8 +126,10 @@
                     <tbody id="infoListBody">
                     </tbody>
                 </table>
-                <p>เงื่อนไขการยืม</p>
-                <ul id="conditionsList"></ul>
+                {{-- <p>เงื่อนไขการยืม</p> --}}
+                {{-- <ul id="conditionsList"></ul> --}}
+                <p>ข้อมูลติดต่อ</p>
+                <ul id="contactinfo"></ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
@@ -140,15 +153,21 @@
             for (const id in itemInfoListforThisLog) {
                 
                 innerHTMLofItemList += `<tr>
+                    <td>${id}</td>
                     <td>${itemInfoList[id][0]}</td>
-                    <td>${itemInfoList[id][1]}</td>
                     <td>${itemInfoListforThisLog[id]}</td>
                 </tr>`;
 
                 innerHTMLofConditions += `<li>${itemInfoList[id][0]}: ${itemInfoList[id][1]}</li>`;
             }
             document.getElementById("infoListBody").innerHTML = innerHTMLofItemList;
-            document.getElementById("conditionsList").innerHTML = innerHTMLofConditions;
+            // document.getElementById("conditionsList").innerHTML = innerHTMLofConditions;
+            document.getElementById("contactinfo").innerHTML = `
+            <li>ชื่อ: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[6].innerText}</li>
+            <li>ชั้นปีที่: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[7].innerText}</li>
+            <li>Line ID: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[8].innerText}</li>
+            <li>เบอร์โทรศัพท์มือถือ: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[9].innerText}</li>            
+            `;
         });
     };
 
