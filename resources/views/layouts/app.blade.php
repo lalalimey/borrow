@@ -47,12 +47,15 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('log')) ? 'active' : '' }}" href="/log">ประวัติการทำรายการ</a>
                         </li>
+                        @can('staff-action')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('staff/edit') ? 'active' : '' }}" href="/staff/edit">แก้ไขรายการอุปกรณ์</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('staff/logmonitor') ? 'active' : '' }}" href="/staff/logmonitor">ยืนยันการทำรายการ</a>
                         </li>
+                        @endcan
+
                         {{-- <li class="nav-item">
                             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                         </li> --}}
