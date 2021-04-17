@@ -140,8 +140,8 @@
             for (const id in itemInfoListforThisLog) {
                 
                 innerHTMLofItemList += `<tr>
+                    <td>${id}</td>
                     <td>${itemInfoList[id][0]}</td>
-                    <td>${itemInfoList[id][1]}</td>
                     <td>${itemInfoListforThisLog[id]}</td>
                 </tr>`;
 
