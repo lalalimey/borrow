@@ -22,6 +22,8 @@ class LogsController extends Controller
 
         $currentUser->line_id = $request->line_id;
         $currentUser->phone = $request->phone;
+        $currentUser->year = $request->year;
+        $currentUser->nickname = $request->nickname;
         $currentUser->save();
         foreach(json_decode($request->itemCart) as $itemID => $quantity) {
             $item = Item::find($itemID); 

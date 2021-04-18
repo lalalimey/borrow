@@ -53,8 +53,8 @@
                             <td class="fit">{{ $log->borrow_date }}</td>
                             <td class="fit">{{ $log->due_date }}</td>
                             <td class="fit">{{ $log->status }}</td>
-                            <td style="display: none">{{$user->name}}</td>
-                            <td style="display: none"></td>
+                            <td style="display: none">{{$user->name}} ({{ $user->nickname ? $user->nickname : '' }})</td>
+                            <td style="display: none">{{$user->year}}</td>
                             <td style="display: none">{{$user->line_id}}</td>
                             <td style="display: none">{{$user->phone}}</td>
                             <td class="fit">

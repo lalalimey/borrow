@@ -83,30 +83,51 @@
                     @csrf
                     <div class="mb-3">
                         <label for="purposeTextArea" class="form-label">จุดประสงค์:</label>
-                        <textarea class="form-control" name="purpose" id="purposeTextArea" rows="3" required></textarea>
+                        <textarea class="form-control" name="purpose" id="purposeTextArea" rows="3" value="" required></textarea>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-4 col-form-label">วันที่ยืม:</label>
+                        <label for="start_date" class="col-sm-4 col-form-label">วันที่ยืม:</label>
                         <div class="col-sm-8">
-                            <input id="start_date" class="form-control" name="start_date" value="" readonly required>
+                            <input id="start_date" class="form-control" name="start_date" value="" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-4 col-form-label">วันที่คืน:</label>
+                        <label for="due_date" class="col-sm-4 col-form-label">วันที่คืน:</label>
                         <div class="col-sm-8">
-                            <input id="due_date" class="form-control" name="due_date" value="" readonly>
+                            <input id="due_date" class="form-control" name="due_date" value="">
+                        </div>
+                    </div>
+                    <h6 class="pt-1">ข้อมูลสำหรับการติดต่อ</h6>
+                    <div class="mb-3 row">
+                        <label for="nickname" class="col-sm-4 col-form-label">ชื่อเล่น:</label>
+                        <div class="col-sm-8">
+                            <input id="nickname" class="form-control" name="nickname" value="{{ Auth::user()->nickname ? Auth::user()->nickname : '' }}">
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-4 col-form-label">เบอร์โทรศัพท์มือถือ:</label>
+                        <label for="year" class="col-sm-4 col-form-label" >ชั้นปีที่:</label>
+                        <div class="col-sm-8">
+                            <select  class="form-select" name="year" id="year" required>
+                                <option selected='selected' value="">--Please choose an option--</option>
+                                <option value="1">1 (MDCU76)</option>
+                                <option value="2">2 (MDCU75)</option>
+                                <option value="3">3 (MDCU74)</option>
+                                <option value="4">4 (MDCU73)</option>
+                                <option value="5">5 (MDCU72)</option>
+                                <option value="6">6 (MDCU71)</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="phone" class="col-sm-4 col-form-label">เบอร์โทรศัพท์มือถือ:</label>
                         <div class="col-sm-8">
                             <input id="phone" class="form-control" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" required>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="quantity" class="col-sm-4 col-form-label">Line id:</label>
+                        <label for="line_id" class="col-sm-4 col-form-label">Line id:</label>
                         <div class="col-sm-8">
-                            <input id="line_id" class="form-control" name="line_id" value=" {{ Auth::user()->line_id ? Auth::user()->line_id : '' }}" required>
+                            <input id="line_id" class="form-control" name="line_id" value="{{ Auth::user()->line_id ? Auth::user()->line_id : '' }}" required>
                         </div>
                     </div>
             </div>
@@ -151,8 +172,12 @@
 @section('script')
     <script>
         // datepicker
-        const start = datepicker('#start_date', { id: 1 })
-        const end = datepicker('#due_date', { id: 1 })
+        let now = new Date();
+        let oneYearfromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+        const start = datepicker('#start_date', { id: 1 }, {startDate: new Date(2021, 0, 1)});
+        const end = datepicker('#due_date', { id: 1 });
+        document.getElementById('start_date').onkeydown = function(e) {e.preventDefault()};
+        document.getElementById('due_date').onkeydown = function(e) {e.preventDefault()};
         //search bar
         function searchItem() {
             // Declare variables
