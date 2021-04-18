@@ -95,7 +95,7 @@
                             <td>{{ $item->quantity }} {{$item->unit}}</td>
                             <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
                             <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
-                            <td class="fit pe-5">{{ $item->owner = "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
+                            <td class="fit pe-5">{{ $item->owner == "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
                             <td class="fit">
                                 <button type="button" class="btn btn-primary float-end" id="{{ 'editModal' .  $item->id }}" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                     แก้ไข

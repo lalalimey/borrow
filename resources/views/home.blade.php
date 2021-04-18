@@ -41,7 +41,7 @@
                             <td>{{ $item->quantity }} {{$item->unit}}</td>
                             <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
                             <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
-                            <td class="fit pe-5">{{ $item->owner = "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
+                            <td class="fit pe-5">{{ $item->owner == "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
                             <td class="fit">
                                 <button type="button" class="btn btn-outline-success" id="{{ 'buttonAddToCartModal' .  $item->id }}" data-bs-toggle="modal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="pointer-events: none">
