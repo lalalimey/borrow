@@ -14,13 +14,18 @@ class ItemsController extends Controller
             $newItem = new Item;
             $newItem->name = $request->name;
             $newItem->quantity = $request->quantity;
+            $newItem->unit = $request->unit;
+            $newItem->disposable = $request->disposable;
+            $newItem->owner = $request->owner;
             $newItem->condition = $request->condition;
-            //$newItem->is_available = 1;
             $newItem->save();
         } elseif ($request->mode == 'edit') {
             $item = Item::where('id', '=', $request->itemID)->first(['id']);
             $item->quantity = $request->quantity;
             $item->condition = $request->condition;
+            $item->unit = $request->unit;
+            $item->disposable = $request->disposable;
+            $item->owner = $request->owner;
             $item->save();
         }
         

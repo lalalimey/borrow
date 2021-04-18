@@ -29,8 +29,32 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="quantity" class="col-sm-2 col-form-label">จำนวน:</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-4">
                                         <input id="quantity" class="form-control" name="quantity" value="">
+                                    </div>
+                                    <label for="unit" class="col-sm-2 col-form-label">หน่วย:</label>
+                                    <div class="col-sm-4">
+                                        <input id="unit" class="form-control" name="unit" value="">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="disposable" class="col-sm-4 col-form-label" >ใช้แล้วต้องคืนไหม:</label>
+                                    <div class="col-sm-8">
+                                        <select  class="form-select" name="disposable" id="disposable" required>
+                                            <option selected='selected' value="">--เลือก--</option>
+                                            <option value="0">ใช่</option>
+                                            <option value="1">ไม่</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="owner" class="col-sm-4 col-form-label" >หน่วยงานที่ดูแล:</label>
+                                    <div class="col-sm-8">
+                                        <select  class="form-select" name="owner" id="owner" required>
+                                            <option selected='selected' value="">--เลือก--</option>
+                                            <option value="SMCU">สพจ.</option>
+                                            <option value="syringe">ฝ่ายพัสดุ</option>
+                                          </select>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -50,11 +74,12 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">ชื่อ</th>
-                    <th scope="col">จำนวนที่ใช้ได้</th>
-                    <th scope="col">สถานะ</th>
-                    <th style="display: none">เงื่อนไข</th>
+                        <th scope="col">id</th>
+                        <th scope="col" id="mainTableHeadName">ชื่อ</th>
+                        <th scope="col">จำนวนที่ใช้ได้</th>
+                        <th style="display: none" id="mainTableHeadCondition">เงื่อนไข</th>
+                        <th class="fit">ใช้แล้วต้องคืนไหม</th>
+                        <th class="fit pe-5">หน่วยงานที่ดูแล</th>
                     <th scope="col" class="fit"></th>
                     {{-- <th scope="col" class="fit"></th> --}}
                     </tr>
@@ -67,9 +92,10 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td></td>
+                            <td>{{ $item->quantity }} {{$item->unit}}</td>
                             <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
+                            <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
+                            <td class="fit pe-5">{{ $item->owner = "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
                             <td class="fit">
                                 <button type="button" class="btn btn-primary float-end" id="{{ 'editModal' .  $item->id }}" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                     แก้ไข
@@ -108,8 +134,11 @@
             itemID = parseInt(event.target.id.replace('editModal',''));
             document.getElementById("name").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[1].innerText;
             document.getElementById("name").readOnly = true ;
-            document.getElementById("quantity").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[2].innerText;
-            document.getElementById("conditionTextArea").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[4].innerText;
+            document.getElementById("quantity").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[2].innerText.split(' ')[0];
+            document.getElementById("unit").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[2].innerText.split(' ')[1];
+            document.getElementById("disposable").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[4].innerText == 'ใช่' ?  0 : 1 ;
+            document.getElementById("owner").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[5].innerText == 'สพจ.' ?  'SMCU' : 'syringe' ;
+            document.getElementById("conditionTextArea").value = document.querySelectorAll('tr')[itemID].querySelectorAll('td')[3].innerText;
         });
     };
 

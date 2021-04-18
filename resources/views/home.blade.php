@@ -22,10 +22,11 @@
                 <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">ชื่อ</th>
+                        <th scope="col" id="mainTableHeadName">ชื่อ</th>
                         <th scope="col">จำนวนที่ใช้ได้</th>
-                        <th scope="col">สถานะ</th>
-                        <th style="display: none">เงื่อนไข</th>
+                        <th style="display: none" id="mainTableHeadCondition">เงื่อนไข</th>
+                        <th class="fit">ใช้แล้วต้องคืนไหม</th>
+                        <th class="fit pe-5">หน่วยงานที่ดูแล</th>
                         <th class="fit"></th>
                     </tr>
                 </thead>
@@ -37,9 +38,10 @@
                         <tr class="mainList">
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td></td>
+                            <td>{{ $item->quantity }} {{$item->unit}}</td>
                             <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
+                            <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
+                            <td class="fit pe-5">{{ $item->owner = "SMCU" ? 'สพจ.' : 'ฝ่ายพัสดุ' }}</td>
                             <td class="fit">
                                 <button type="button" class="btn btn-outline-success" id="{{ 'buttonAddToCartModal' .  $item->id }}" data-bs-toggle="modal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="pointer-events: none">
@@ -171,6 +173,15 @@
 
 @section('script')
     <script>
+        // Popovers
+        let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+        })
+
+        // Cell Column Index For references
+        const nameColumnNumber = document.getElementById("mainTableHeadName").cellIndex;
+        const conditionColumnNumber = document.getElementById("mainTableHeadCondition").cellIndex;
         // datepicker
         let now = new Date();
         let oneYearfromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
@@ -219,10 +230,10 @@
         let addToCartButtonList = document.querySelectorAll('[id^="buttonAddToCartModal"]');
         for (let i = 0; i < addToCartButtonList.length; i++) {
             addToCartButtonList[i].addEventListener("click", function(event) {
-                myModal.toggle();
                 itemID = parseInt(event.target.id.replace('buttonAddToCartModal',''));
-                document.getElementById("addToCartModalLabel").innerText = document.querySelectorAll('tr[class="mainList"]')[itemID - 1].querySelectorAll('td')[1].innerText;
-                document.getElementById("borrowConditions").innerText = document.querySelectorAll('tr[class="mainList"]')[itemID - 1].querySelectorAll('td')[4].innerText;
+                document.getElementById("addToCartModalLabel").innerText = document.querySelectorAll('tr[class="mainList"]')[itemID - 1].querySelectorAll('td')[nameColumnNumber].innerText;
+                document.getElementById("borrowConditions").innerText = document.querySelectorAll('tr[class="mainList"]')[itemID - 1].querySelectorAll('td')[conditionColumnNumber].innerText;
+                myModal.toggle();
             });
         };
 
@@ -273,8 +284,8 @@
             let innerHTMLofItemList = '';
             let innerHTMLofConditions = '';
             for (const id in cart) {
-                let name = document.querySelectorAll('tr[class="mainList"]')[id - 1].querySelectorAll('td')[1].innerText.toString();
-                let condition = document.querySelectorAll('tr[class="mainList"]')[id - 1].querySelectorAll('td')[4].innerText.toString();
+                let name = document.querySelectorAll('tr[class="mainList"]')[id - 1].querySelectorAll('td')[nameColumnNumber].innerText.toString();
+                let condition = document.querySelectorAll('tr[class="mainList"]')[id - 1].querySelectorAll('td')[conditionColumnNumber].innerText.toString();
                 innerHTMLofItemList += `<tr>
                     <td>${id}</td>
                     <td>${name}</td>
