@@ -18,10 +18,11 @@ class CreateLogsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->mediumText('item_list')->nullable();
             $table->mediumText('purpose')->nullable();
-            $table->enum('status', ['PENDING', 'CANCELLED','BORROWED', 'RETURNED'])->default('PENDING');
+            $table->enum('status', ['PENDING', 'CANCELLED','BORROWED', 'RETURNED', 'RECEIVED'])->default('PENDING');
             $table->date('borrow_date')->nullable();
             $table->date('due_date')->nullable();
             $table->date('return_date')->nullable();
+            $table->boolean('log_is_disposable')->default(1);
             $table->timestamps();
         });
     }

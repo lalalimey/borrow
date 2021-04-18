@@ -25,15 +25,25 @@ class LogsController extends Controller
         $currentUser->year = $request->year;
         $currentUser->nickname = $request->nickname;
         $currentUser->save();
+        
+        $newLog->log_is_disposable = true;
         foreach(json_decode($request->itemCart) as $itemID => $quantity) {
-            $item = Item::find($itemID); 
+            $item = Item::find($itemID);
+            $newLog->log_is_disposable &= $item->disposable;
             if (!$item->log_list) {
                 $item->log_list = json_encode([$newLog->id]);
             } else {
-                $item->log_list = json_encode(array_push(่json_decode($item->log_list), $newLog->id));
+                $array = json_decode($item->log_list);
+                $array[] = $newLog->id;
+                //return dd(json_encode($array));
+                $item->log_list = json_encode($array);
             }
             $item->save();
         }
+        if ($newLog->log_is_disposable == true) {
+            $newLog->due_date = null;
+        }
+        $newLog->save();
     }
 
     public function cancelLog(Request $request)
@@ -48,9 +58,25 @@ class LogsController extends Controller
     {
         $log = Log::find($request->id);
         if ($log->status == "PENDING") {
-            $log->status = 'BORROWED';
+            $log->status = $log->log_is_disposable ? 'RECEIVED' :'BORROWED';
+
+            foreach(json_decode($log->item_list) as $itemID => $quantity) {
+                $item = Item::find($itemID);
+                $item->quantity -= $quantity;
+                $item->save();
+            }
+
         } elseif ($log->status == "BORROWED") {
             $log->status = 'RETURNED';
+
+            foreach(json_decode($log->item_list) as $itemID => $quantity) {
+                $item = Item::find($itemID);
+                if (!$item->disposable) {
+                    $item->quantity += $quantity;
+                    
+                }
+                $item->save();
+            }
         }
         $log->save();
     }
