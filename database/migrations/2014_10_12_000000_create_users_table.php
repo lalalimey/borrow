@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->string('line_id', 30)->nullable();
             $table->string('phone', 20)->nullable();
             $table->enum('status', ['USER', 'STAFF', 'ADMIN'])->default('USER');
+            $table->boolean('agreetotermsandconditions')->default(0);
+            $table->boolean('dataconsent')->default(0);
             $table->timestamps();
         });
     }
