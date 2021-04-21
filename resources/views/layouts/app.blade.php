@@ -42,7 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('home')) ? 'active' : '' }}" aria-current="page" href="/home">Home</a>
+                            <a class="nav-link {{ (request()->is('home')) ? 'active' : '' }}" aria-current="page" href="/home">หน้าแรก</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('log')) ? 'active' : '' }}" href="/log">ประวัติการทำรายการ</a>
