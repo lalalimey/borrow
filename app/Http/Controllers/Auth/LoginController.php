@@ -47,7 +47,9 @@ class LoginController extends Controller
     */
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->with(['hd' => 'docchula.com'])
+            ->redirect();
     }
 
     /**
