@@ -54,6 +54,7 @@
                                             <option selected='selected' value="">--เลือก--</option>
                                             <option value="SMCU">สพจ.</option>
                                             <option value="syringe">ฝ่ายพัสดุ</option>
+                                            <option value="photo">ฝ่าย Photo</option>
                                           </select>
                                     </div>
                                 </div>
