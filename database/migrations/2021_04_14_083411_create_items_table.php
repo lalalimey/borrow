@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->mediumText('condition');
             $table->mediumText('log_list')->nullable();
             $table->boolean('disposable')->default(1);
-            $table->enum('owner', ['SMCU', 'syringe'])->default('syringe');
+            $table->enum('owner', ['SMCU', 'syringe', 'photo'])->default('syringe');
             $table->timestamps();
         });
 
