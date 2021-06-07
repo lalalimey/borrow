@@ -123,7 +123,7 @@
                         <label for="year" class="col-sm-4 col-form-label" >ชั้นปีที่:</label>
                         <div class="col-sm-8">
                             <select  class="form-select" name="year" id="year" required>
-                                <option selected='selected' value="">--Please choose an option--</option>
+                                <option selected='selected' value="">--เลือก--</option>
                                 <option value="1">1 (MDCU77)</option>
                                 <option value="2">2 (MDCU76)</option>
                                 <option value="3">3 (MDCU75)</option>
