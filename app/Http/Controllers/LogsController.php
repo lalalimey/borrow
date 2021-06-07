@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Log;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
-//use Phattarachai\LineNotify\Facade\Line;
-use Phattarachai\LineNotify\Line;
+use Phattarachai\LineNotify\Facade\Line;
+//use Phattarachai\LineNotify\Line;
 
 class LogsController extends Controller
 {
@@ -47,10 +47,10 @@ class LogsController extends Controller
         }
         $newLog->save();
 
-        //Line::send("มีรายการใหม่\nเข้าสู่ระบบ: https://borrow.docchula.com/");
+        Line::send("มีรายการใหม่\nเข้าสู่ระบบ: https://borrow.docchula.com/");
 
-        $line = new Line('LINE_TOKEN');
-        $line->send("มีรายการใหม่\nเข้าสู่ระบบ: https://borrow.docchula.com/");
+        //$line = new Line('LINE_TOKEN');
+        //$line->send("มีรายการใหม่\nเข้าสู่ระบบ: https://borrow.docchula.com/");
     }
 
     public function cancelLog(Request $request)
