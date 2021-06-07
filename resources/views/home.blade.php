@@ -124,12 +124,12 @@
                         <div class="col-sm-8">
                             <select  class="form-select" name="year" id="year" required>
                                 <option selected='selected' value="">--Please choose an option--</option>
-                                <option value="1">1 (MDCU76)</option>
-                                <option value="2">2 (MDCU75)</option>
-                                <option value="3">3 (MDCU74)</option>
-                                <option value="4">4 (MDCU73)</option>
-                                <option value="5">5 (MDCU72)</option>
-                                <option value="6">6 (MDCU71)</option>
+                                <option value="1">1 (MDCU77)</option>
+                                <option value="2">2 (MDCU76)</option>
+                                <option value="3">3 (MDCU75)</option>
+                                <option value="4">4 (MDCU74)</option>
+                                <option value="5">5 (MDCU73)</option>
+                                <option value="6">6 (MDCU72)</option>
                               </select>
                         </div>
                     </div>
