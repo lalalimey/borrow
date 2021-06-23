@@ -147,7 +147,7 @@
     for (let i = 0; i < infoButtonList.length; i++) {
         infoButtonList[i].addEventListener("click", function(event) {
             let buttonID = parseInt(event.target.id.replace('buttonInfoModal',''));
-            let itemInfoListforThisLog = JSON.parse(document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[1].innerText);
+            let itemInfoListforThisLog = JSON.parse(event.target.parentNode.parentElement.querySelectorAll('td')[1].innerText);
             let innerHTMLofItemList = '';
             let innerHTMLofConditions = '';
             for (const id in itemInfoListforThisLog) {
@@ -163,10 +163,10 @@
             document.getElementById("infoListBody").innerHTML = innerHTMLofItemList;
             // document.getElementById("conditionsList").innerHTML = innerHTMLofConditions;
             document.getElementById("contactinfo").innerHTML = `
-            <li>ชื่อ: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[6].innerText}</li>
-            <li>ชั้นปีที่: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[7].innerText}</li>
-            <li>Line ID: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[8].innerText}</li>
-            <li>เบอร์โทรศัพท์มือถือ: ${document.querySelectorAll('tr[class="mainList"]')[buttonID - 1].querySelectorAll('td')[9].innerText}</li>            
+            <li>ชื่อ: ${event.target.parentNode.parentElement.querySelectorAll('td')[6].innerText}</li>
+            <li>ชั้นปีที่: ${event.target.parentNode.parentElement.querySelectorAll('td')[7].innerText}</li>
+            <li>Line ID: ${event.target.parentNode.parentElement.querySelectorAll('td')[8].innerText}</li>
+            <li>เบอร์โทรศัพท์มือถือ: ${event.target.parentNode.parentElement.querySelectorAll('td')[9].innerText}</li>            
             `;
         });
     };
