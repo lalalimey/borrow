@@ -368,7 +368,7 @@
                 
             
                 <ol>
-                    <li>ติดต่อเพื่อยืมพัสดุล่วงหน้า อย่างน้อย 3 วัน มาทาง Line official BORROW SMCU (<a href="https://lin.ee/tsfxuhW">https://lin.ee/tsfxuhW</a>)</li>
+                    <li>ติดต่อเพื่อยืมพัสดุล่วงหน้า อย่างน้อย 3 วัน มาทาง Line official SMCU BORROW (<a href="https://lin.ee/tsfxuhW">https://lin.ee/tsfxuhW</a>)</li>
                     <li>ติดต่อตกลงวันที่คืนพัสดุทุกครั้งก่อนนำมาคืน</li>
                     <li>ยืมพัสดุได้ไม่เกิน 14 วัน</li>
                     <li>หากยืมพัสดุเกินวันที่ตกลงกันไว้ โปรดแจ้งล่วงหน้าและชี้แจงเหตุผล</li>
