@@ -33,7 +33,7 @@
                     <ol>
                         <li>ติดต่อเพื่อยืมพัสดุล่วงหน้า อย่างน้อย 3 วัน แยกตามหน่วยงานที่รับผิดชอบดูแล ผ่านช่องทางดังต่อไปนี้
                             <ol>
-                                <li>ฝ่ายพัสดุและ สพจ.: Line official BORROW SMCU (<a href="https://lin.ee/tsfxuhW">https://lin.ee/tsfxuhW</a>)</li>
+                                <li>ฝ่ายพัสดุและ สพจ.: Line official SMCU BORROW (<a href="https://lin.ee/tsfxuhW">https://lin.ee/tsfxuhW</a>)</li>
                                 <li>ฝ่าย Photo: Line official MDCU Photo (<a href="https://lin.ee/JEDvyib">https://lin.ee/JEDvyib</a>)</li>
                             </ol>
                         </li>
