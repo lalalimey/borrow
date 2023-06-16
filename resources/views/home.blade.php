@@ -121,7 +121,6 @@
 
                             </tbody>
                         </table>
-                        <p id="demo1"></p>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0" style="display: none">...</div>
                     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0" style="display: none">...</div>
@@ -132,20 +131,22 @@
         </div>
     </div>
 </div>
-<!-- test Modal -->
+<!-- kuru Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">สรุปรายการที่เลือก ทั้งหมด  ชิ้น</h1> <!--ยังไม่ได้ใส่จำนวนรวม -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-primary">ยืม</button>
+                <button type="button" class="btn btn-primary">แจ้งซ่อม</button>
+                <button type="button" class="btn btn-primary">Checkup</button>
             </div>
         </div>
     </div>
