@@ -280,14 +280,21 @@
             var checkBox = document.getElementById($id);
             if (checkBox.checked == true) {
                 selected1.push($id);
-                //document.getElementById("demo1").innerHTML = $id;
-                document.getElementById("demo1").innerHTML = selected1;
+                updatekuruButton();
             } else {
                 const index = selected1.indexOf($id);
                 selected1.splice(index, 1);
+                updatekuruButton()
             }
-        }
 
+        }
+        function updatekuruButton () {
+            let counter = 0;
+            for (selected2 in selected1){
+                counter++;
+            }
+            document.getElementById("kuruItemCount").innerText = counter;
+        }
 
         // Cell Column Index For references
         const nameColumnNumber = document.getElementById("mainTableHeadName").cellIndex;
