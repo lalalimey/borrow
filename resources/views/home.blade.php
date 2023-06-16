@@ -373,7 +373,7 @@
         // kuru add selected
         let selected1 = new Array();
         function add($id) {
-            var checkBox = document.getElementById($id);
+            let checkBox = document.getElementById($id);
             if (checkBox.checked == true) {
                 selected1.push($id);
                 updatekuruButton();
@@ -384,7 +384,6 @@
             }
         }
 
-        }
         function updatekuruButton () {
             let counter = 0;
             for (selected2 in selected1){
