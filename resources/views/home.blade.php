@@ -5,68 +5,148 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            
-                    <div class="d-flex flex-row-reverse">
-                        <button type="button" class="btn btn-primary mx-2" id="buttonCheckout" data-bs-toggle="modal" data-bs-target="#checkoutModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" style="pointer-events: none">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                              </svg>
-                            <span class="badge bg-light text-dark ms-1" id="badgeItemCount">0</span>
-                        </button>
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control" id="itemNameInput" onkeyup="searchItem()" placeholder="ค้นหาด้วยชื่อ">
-                        </div>
+            <div class="d-flex flex-row-reverse">
+                <button type="button" class="btn btn-secondary mx-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" style="pointer-events: none">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        <span class="badge bg-light text-dark ms-1" id="kuruItemCount">0</span>
+                    </svg>
+                </button>
+                <button type="button" class="btn btn-primary mx-2" id="buttonCheckout" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" style="pointer-events: none">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <span class="badge bg-light text-dark ms-1" id="badgeItemCount">0</span>
+                </button>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" id="itemNameInput" onkeyup="searchItem()" placeholder="ค้นหาด้วยชื่อ">
+                </div>
+
+            </div>
+        <div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">วัสดุ</button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">ครุภัณฑ์</button>
+                        <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
                     </div>
-                    
-            
-            <table class="table align-middle" id="itemTable">
-                <thead>
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col" id="mainTableHeadName">ชื่อ</th>
-                        <th scope="col">จำนวนที่ใช้ได้</th>
-                        <th style="display: none" id="mainTableHeadCondition">เงื่อนไข</th>
-                        <th class="fit">ใช้แล้วต้องคืนไหม</th>
-                        <th class="fit pe-5">หน่วยงานที่ดูแล</th>
-                        <th class="fit"></th>
-                    </tr>
-                </thead>
-                @php
-                    $items = \App\Models\Item::get();
-                @endphp
-                <tbody>
-                    @foreach($items as $item)
-                        <tr class="mainList">
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->quantity }} {{$item->unit}}</td>
-                            <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
-                            <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
-                            <td class="fit pe-5">@php
-                                switch ($item->owner) {
-                                case "SMCU":
-                                    echo "สพจ.";
-                                    break;
-                                case "syriinge":
-                                    echo "ฝ่ายพัสดุ";
-                                    break;
-                                case "photo":
-                                    echo "ฝ่าย Photo";
-                                    break;
-                            }
-                            @endphp</td>
-                            <td class="fit">
-                                <button type="button" class="btn btn-outline-success" id="{{ 'buttonAddToCartModal' .  $item->id }}" data-bs-toggle="modal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="pointer-events: none">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        <table class="table align-middle" id="itemTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col" id="mainTableHeadName">ชื่อ</th>
+                                <th scope="col">จำนวนที่ใช้ได้</th>
+                                <th style="display: none" id="mainTableHeadCondition">เงื่อนไข</th>
+                                <th class="fit">ใช้แล้วต้องคืนไหม</th>
+                                <th class="fit pe-5">หน่วยงานที่ดูแล</th>
+                                <th class="fit"></th>
+                            </tr>
+                            </thead>
+                            @php
+                                $items = \App\Models\Item::get();
+                            @endphp
+                            <tbody>
+                            @foreach($items as $item)
+                                <tr class="mainList">
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->quantity }} {{$item->unit}}</td>
+                                    <td style="display: none">{{ $item->condition ? $item->condition : "ไม่มี" }}</td>
+                                    <td class="fit">{{ $item->disposable ? 'ไม่' : 'ใช่' }}</td>
+                                    <td class="fit pe-5">@php
+                                            switch ($item->owner) {
+                                            case "SMCU":
+                                                echo "สพจ.";
+                                                break;
+                                            case "syriinge":
+                                                echo "ฝ่ายพัสดุ";
+                                                break;
+                                            case "photo":
+                                                echo "ฝ่าย Photo";
+                                                break;
+                                        }
+                                        @endphp</td>
+                                    <td class="fit">
+                                        <button type="button" class="btn btn-outline-success" id="{{ 'buttonAddToCartModal' .  $item->id }}" data-bs-toggle="modal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16" style="pointer-events: none">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0" >
+                        <table class="table align-middle" id="itemTable">
+                            <thead>
+                            <tr>
+                                <th>select</th>
+                                <th scope="col">id</th>
+                                <th scope="col" id="mainTableHeadName">ชื่อ</th>
+                                <th scope="col">ฝ่าย</th>
+                                <th scope="col">สถานที่</th>
+                                <th scope="col">งบ</th>
+                                <th style="display: none" id="mainTableHeadCondition">เงื่อนไข</th>
+                                <th scope="col">ปีที่เบิก</th>
+                                <th class="fit pe-5">status</th>
+                                <th class="fit"></th>
+
+                            </tr>
+                            </thead>
+                            @php
+                                $kurus = \App\Models\kuru::get();
+                                $selecteds = [];
+                            @endphp
+                            <tbody>
+                            @foreach($kurus as $kuru)
+                                <tr class="mainList">
+                                    <td>
+                                        <input type="checkbox" onclick="add({{$kuru->id}})" id="{{$kuru->id}}">
+                                    </td>
+                                    <td>{{ $kuru->id }}</td>
+                                    <td>{{ $kuru->name }}</td>
+                                    <td>{{ $kuru->owner }}</td>
+                                    <td>{{ $kuru->storage }}</td>
+                                    <td>{{ $kuru->budget }}</td>
+                                    <td>{{ $kuru->year }}</td>
+                                    <td>{{$kuru->status }} (last check up :{{$kuru->last_check}})</td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                        <p id="demo1"></p>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0" style="display: none">...</div>
+                    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0" style="display: none">...</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- test Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
@@ -89,12 +169,12 @@
                         </tr>
                     </thead>
                     <tbody id="checkoutListBody">
-                        
+
                     </tbody>
                 </table>
                 <p>เงื่อนไขการยืม</p>
                 <ul id="conditionsList"></ul>
-                <form id="checkoutForm">                    
+                <form id="checkoutForm">
                     @csrf
                     <div class="mb-3">
                         <label for="purposeTextArea" class="form-label">จุดประสงค์:</label>
@@ -167,7 +247,7 @@
                     <h6>เงื่อนไขการยืม</h6>
                     <p class="align-top" id="borrowConditions"></p>
                 </div>
-                    
+
                 <div class="mb-3 row">
                     <label for="quantity" class="col-sm-4 col-form-label">ระบุจำนวนที่ต้องการ:</label>
                     <div class="col-sm-8">
@@ -191,6 +271,22 @@
         let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)
         })
+
+
+        // kuru add selected
+        let selected1 = new Array();
+        function add($id) {
+            var checkBox = document.getElementById($id);
+            if (checkBox.checked == true) {
+                selected1.push($id);
+                //document.getElementById("demo1").innerHTML = $id;
+                document.getElementById("demo1").innerHTML = selected1;
+            } else {
+                const index = selected1.indexOf($id);
+                selected1.splice(index, 1);
+            }
+        }
+
 
         // Cell Column Index For references
         const nameColumnNumber = document.getElementById("mainTableHeadName").cellIndex;
@@ -272,7 +368,7 @@
             updateCheckoutButton();
             myModal.toggle()
         }
-        
+
         function deleteFromCart (event) {
             itemID = parseInt(event.target.id.replace('buttonDelete',''));
             if (cart.hasOwnProperty(itemID)) {
@@ -292,7 +388,7 @@
         }
 
         // Checkout
-        
+
         document.getElementById("buttonCheckout").addEventListener("click", function () {
             let innerHTMLofItemList = '';
             let innerHTMLofConditions = '';
@@ -364,9 +460,9 @@
 <div class="container">
     <div>
         <h1 class="text-center">ระเบียบการยืม-คืนพัสดุ</h1>
-        <p >    
-                
-            
+        <p >
+
+
                 <ol>
                     <li>ติดต่อเพื่อยืมพัสดุล่วงหน้า อย่างน้อย 3 วัน มาทาง Line official SMCU BORROW (<a href="https://lin.ee/tsfxuhW">https://lin.ee/tsfxuhW</a>)</li>
                     <li>ติดต่อตกลงวันที่คืนพัสดุทุกครั้งก่อนนำมาคืน</li>
@@ -374,7 +470,7 @@
                     <li>หากยืมพัสดุเกินวันที่ตกลงกันไว้ โปรดแจ้งล่วงหน้าและชี้แจงเหตุผล</li>
                     <li>เมื่อคืนพัสดุแล้ว ต้อง “ถ่ายรูป” การคืนพัสดุเป็นหลักฐานลงในรูปแบบที่กำหนดไว้</li>
                 </ol>
-                หมายเหตุ: ข้อมูลส่วนบุคคลได้แก่ ชื่อ-นามสกุล ชั้นปี เบอร์โทร และ/หรือ ไลน์ไอดี จะถูกนำไปใช้ระบุตัวตนเพื่อติดต่อสื่อสารเกี่ยวกับการยืมพัสดุเท่านั้น 
+                หมายเหตุ: ข้อมูลส่วนบุคคลได้แก่ ชื่อ-นามสกุล ชั้นปี เบอร์โทร และ/หรือ ไลน์ไอดี จะถูกนำไปใช้ระบุตัวตนเพื่อติดต่อสื่อสารเกี่ยวกับการยืมพัสดุเท่านั้น
                 <br>
                 ข้อมูลของท่านจะถูกเก็บเป็นความลับ โดยผู้มีสิทธิ์เข้าถึงข้อมูลของเว็บไซต์นี้ จะมีเพียงอุปนายกผู้ดูแลพัสดุ และประธานฝ่ายสวัสดิการและพัสดุ สโมสรนิสิตคณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัยเท่านั้น
                 <br>
@@ -401,10 +497,10 @@
             </div>
             <input type="submit" class="btn btn-primary mt-3" value="ตกลง">
         </form>
-            
+
     </div>
     <div class="row justify-content-center">
-        
+
     </div>
 </div>
 @endsection
@@ -433,7 +529,7 @@
                 XHR.open( "POST", "/home/agree" );
 
                 // Add the required HTTP header for form data POST requests
-                
+
                 //XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 
                 // The data sent is what the user provided in the form
