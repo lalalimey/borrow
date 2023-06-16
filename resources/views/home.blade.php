@@ -121,7 +121,6 @@
 
                             </tbody>
                         </table>
-                        <p id="demo1"></p>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0" style="display: none">...</div>
                     <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0" style="display: none">...</div>
@@ -132,20 +131,118 @@
         </div>
     </div>
 </div>
-<!-- test Modal -->
+<!-- kuru Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">สรุปรายการที่เลือก ทั้งหมด  ชิ้น</h1> <!--ยังไม่ได้ใส่จำนวนรวม -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-secondary mx-2 " data-bs-toggle="modal" data-bs-target="#kuruconfirmborrow">ยืม</button>
+                <button type="button" class="btn btn-primary">แจ้งซ่อม</button>
+                <button type="button" class="btn btn-primary">Checkup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- kuru Content Modal -->
+<div class="modal fade" id="kuruconfirmborrow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">รายละเอียดการยืม</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> <!-- เนื้อหารายละเอียดการยืม -->
+                <form id="checkoutForm">
+                    @csrf
+                    <div class="mb-3 row">
+                        <label for="purposeText" class="col-sm-4 col-form-label">เพื่อใช้ในกิจกรรม/งาน:</label>
+                        <div class="col-sm-8">
+                            <input id="event" class="form-control" name="event" value="">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="BorrowByClub" class="col-sm-4 col-form-label" >ยืมโดยฝ่าย:</label>
+                        <div class="col-sm-8">
+                            <select  class="form-select" name="Club" id="club" required>
+                                <option selected='selected' value="">--เลือก--</option>
+                                <option value="1">ฝ่ายกีฬาและส่งเสริมสุขภาพ</option>
+                                <option value="2">ฝ่ายดนตรีสากล</option>
+                                <option value="3">ฝ่ายถ่ายภาพและสื่อประสม</option>
+                                <option value="4">ฝ่ายเทคโนโลยีสารสนเทศ</option>
+                                <option value="5">ฝ่ายพัฒนาสังคมและบําเพ็ญประโยชน์</option>
+                                <option value="6">ฝ่ายวิชาการ</option>
+                                <option value="7">ฝ่ายวิเทศสัมพันธ์</option>
+                                <option value="8">ฝ่ายวินัยและนิสิตสัมพันธ์</option>
+                                <option value="9">ฝ่ายศานติธรรม</option>
+                                <option value="10">ฝ่ายศิลปะวัฒนธรรม</option>
+                                <option value="11">ฝ่ายสวัสดิการและพัสดุ</option>
+                                <option value="12">ฝ่ายแสงเสียง</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="phone" class="col-sm-4 col-form-label">รายละเอียดเพิ่มเติม:</label>
+                        <div class="col-sm-8">
+                            <input id="MoreInfo" class="form-control" name="moreinfo" placeholder="(not required)" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="start_date" class="col-sm-4 col-form-label">วันที่ยืม:</label>
+                        <div class="col-sm-8">
+                            <input id="start_date" class="form-control" name="start_date" value="" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="due_date" class="col-sm-4 col-form-label">วันที่คืน:</label>
+                        <div class="col-sm-8">
+                            <input id="due_date" class="form-control" name="due_date" value="">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="phone" class="col-sm-4 col-form-label">สถานที่:</label>
+                        <div class="col-sm-8">
+                            <input id="MoreInfo" class="form-control" name="moreinfo" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="Image" class="col-sm-4 col-form-label">อัพโหลดรูปภาพ</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="event" type="file" id="img" name="img" accept="image/*;capture=camera">
+                        </div>
+                    </div>
+                    <div class="mb-3 row" style="display:none">
+                        <label for="nickname" class="col-sm-4 col-form-label">ชื่อเล่น:</label>
+                        <div class="col-sm-8">
+                            <input id="nickname" class="form-control" name="nickname" value="{{ Auth::user()->nickname ? Auth::user()->nickname : '' }}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row" style="display:none">
+                        <label for="phone" class="col-sm-4 col-form-label">เบอร์โทรศัพท์มือถือ:</label>
+                        <div class="col-sm-8">
+                            <input id="phone" class="form-control" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" style="display:none">
+                        <label for="line_id" class="col-sm-4 col-form-label">Line id:</label>
+                        <div class="col-sm-8">
+                            <input id="line_id" class="form-control" name="line_id" value="{{ Auth::user()->line_id ? Auth::user()->line_id : '' }}" required>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <input type="button" class="btn btn-secondary" value="Draft">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
             </div>
         </div>
     </div>
