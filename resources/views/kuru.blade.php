@@ -5,10 +5,37 @@ use App\Models\KuruModel;
 @if (Auth::user()->agreetotermsandconditions && Auth::user()->dataconsent)
     @section('content')
         <div class="container">
-            <?php
-                $kurus = KuruModel::all();
-                dd($kurus)
-                ?>
+            <div class="row justify-content-center">
+                    <?php
+                    $kurus = KuruModel::all();
+                    ?>
+                <table class="table align-middle" id="itemTable">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col" id="mainTableHeadName">ชื่อ</th>
+                        <th scope="col">ฝ่าย</th>
+                        <th scope="col">สถานที่</th>
+                        <th scope="col">งบ</th>
+                        <th scope="col">ปีที่เบิก</th>
+                        <th class="fit"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($kurus as $kuru)
+                            <td>{{ $kuru->number }}</td>
+                            <td>{{ $kuru->name }}</td>
+                            <td>{{ $kuru->division }}</td>
+                            <td>{{ $kuru->storage }}</td>
+                            <td>{{ $kuru->budget }}</td>
+                            <td>{{ $kuru->year }}</td>
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                        @endforeach
+                    </tbody>
+
+            </div>
         </div>
     @endsection
 @else
