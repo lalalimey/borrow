@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/kuru', [App\Http\Controllers\KuruController::class, 'index'])->name('kuru');
     Route::get('/search', [App\Http\Controllers\KuruController::class, 'search'])->name('search');
+    Route::post('/kuru/save', [App\Http\Controllers\KuruController::class, 'save'])->name('save');
     //Route::view('termsandconditions', 'termsandconditions');
     Route::post('/home/agree', 'App\Http\Controllers\UsersController@agree' ); //
     Route::post('/home/newlog', 'App\Http\Controllers\LogsController@newLog');

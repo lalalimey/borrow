@@ -43,4 +43,8 @@ class KuruController extends Controller
 
         return view('kuru', compact('kurus'));
     }
+    public function save(Request $request){
+        $checkedIds = $request->input('checkboxes');
+        dd($request);
+    }
 }
