@@ -34,18 +34,13 @@ class KuruController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $selectedItems = $request->input('selected_items', []);
-
-        // Store the selected item IDs in the session
-        Session::put('selected_items', $selectedItems);
-
         // Perform the search on the Kuru model using the 'name' field as an example.
         // Adjust the search criteria as per your specific use case.
         $kurus = KuruModel::where('name', 'like', '%' . $query . '%')
             ->orWhere('number', $query) // Search by ID
             ->get();
 
+
         return view('kuru', compact('kurus'));
     }
-
 }
