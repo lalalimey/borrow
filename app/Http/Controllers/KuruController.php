@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\KuruModel;
-
+use App\Imports\ExcelImport;
 use Illuminate\Http\Request;
 use App\Models\Kuru_logModal;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -59,6 +62,53 @@ class KuruController extends Controller
         $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
         $newLog->save();
         return redirect('kuru');
+    }
+
+
+    public function addfromfile(Request $request){
+        $validator = Validator::make($request->all(), [
+            'excel_file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        $file = $request->file('excel_file');
+
+        // Validate and store the file
+        // ...
+
+        // Load the Excel file and let the ExcelImport class handle the import and data storage
+        $excelImport = new ExcelImport();
+        Excel::import($excelImport, $file);
+
+        // Get the data from the import
+        $datas = $excelImport->getData();
+        foreach ($datas as $data){
+            $newkuru = new KuruModel();
+            $newkuru->number =$data['number'];
+            $newkuru->name =$data['name'];
+            $newkuru->division =$data['division'];
+            $newkuru->storage =$data['storage'];
+            $newkuru->budget =$data['budget'];
+            $newkuru->year =$data['year'];
+            $newkuru->save();
+        }
+        // Now you can process $data as needed
+
+        return redirect()->back()->with('success', 'Excel file uploaded and added to database.');
+    }
+
+    public function download()
+    {
+        $filePath = 'public/template.xlsx'; // Update with your actual file path
+
+        // Ensure the file exists before attempting to download
+        if (Storage::exists($filePath)) {
+            return Storage::download($filePath, 'template.xlsx');
+        } else {
+            abort(404);
+        }
     }
 
 }

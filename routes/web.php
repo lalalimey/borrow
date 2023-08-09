@@ -35,7 +35,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('staff')->middleware(['staff'])->group(function () {
+    Route::get('/download-excel', [App\Http\Controllers\KuruController::class, 'download'])->name('download.excel');
+    Route::post('/kuru/addfromfile', [App\Http\Controllers\KuruController::class, 'addfromfile'])->name('addfromfile');
     Route::view('edit', 'staff.edititem');
+    Route::view('kuru/add', 'staff.addkuru');
     Route::post('edit', 'App\Http\Controllers\ItemsController@updateItemInfo');
     Route::view('logmonitor', 'staff.approvelog');
     Route::post('logmonitor/approve', 'App\Http\Controllers\LogsController@approveLog');

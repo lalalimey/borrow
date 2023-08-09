@@ -6,9 +6,12 @@
         <div class="flex-reverse mb-3">
             <div class="d-flex flex-row-reverse">
                 <!-- Add onclick event to call the showCheckoutModal() function -->
-                <button type="button" class="btn btn-primary" id="borrow" onclick="showCheckoutModal()">
+                <button type="button" class="btn btn-primary ms-2" id="borrow" onclick="showCheckoutModal()">
                     borrow
                 </button>
+                @if(Auth::user()->status == 'STAFF')
+                    <a href="staff/kuru/add"><button type="button" class="btn btn-primary">เพิ่มครุภัณฑ์</button></a>
+                @endif
             </div>
         </div>
         <div class="row justify-content-center">
@@ -34,9 +37,21 @@
                         <td>{{ $kuru->storage }}</td>
                         <td>{{ $kuru->budget }}</td>
                         <td>{{ $kuru->year }}</td>
-                        <td>{{ $kuru->status }}</td>
+                        @if($kuru->status == 'normal')
+                            <td>{{ $kuru->status }}</td>
+                        @elseif($kuru->status == 'pending')
+                            <td><span class="text-secondary">{{ $kuru->status }}</span></td>
+                        @elseif($kuru->status == 'broken')
+                            <td><span class="text-danger">{{ $kuru->status }}</span></td>
+                        @elseif($kuru->status == 'borrowed')
+                            <td><span class="text-primary">{{ $kuru->status }}</span></td>
+                        @endif
                         <td>
-                            <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}">
+                            @if($kuru->status == 'normal')
+                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}">
+                            @else
+                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}" disabled>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -44,6 +59,7 @@
             </table>
         </div>
     </div>
+
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">

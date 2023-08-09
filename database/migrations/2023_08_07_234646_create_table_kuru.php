@@ -21,8 +21,8 @@ class CreateTableKuru extends Migration
             $table->string('storage');
             $table->string('budget');
             $table->integer('year');
-            $table->enum('status', ['normal', 'pending', 'borrowed', 'broken']);
-            $table->date('checkup');
+            $table->enum('status', ['normal', 'pending', 'borrowed', 'broken'])->default('normal');
+            $table->date('checkup')->nullable();
             $table->timestamps();
         });
     }
