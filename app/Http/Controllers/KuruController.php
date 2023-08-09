@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\KuruModel;
+
 use Illuminate\Http\Request;
+use App\Models\Kuru_logModal;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class KuruController extends Controller
@@ -31,20 +34,31 @@ class KuruController extends Controller
         return view('kuru', compact('kurus'));
     }
 
-    public function search(Request $request)
+    public function save(Request $request)
     {
-        $query = $request->input('query');
-        // Perform the search on the Kuru model using the 'name' field as an example.
-        // Adjust the search criteria as per your specific use case.
-        $kurus = KuruModel::where('name', 'like', '%' . $query . '%')
-            ->orWhere('number', $query) // Search by ID
-            ->get();
+        $text = $request->input('list');
+        $lists = explode(', ', $text);
+        foreach ($lists as $list) {
+            $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
 
+            if ($kuru) {
+                $kuru->update(['status' => 'pending']);
+            } else {
+                // Print a message for debugging
+                echo "No record found for list: $list";
+            }
+        }
+        $currentUser = Auth::user();
+        $newLog = new Kuru_logModal();
+        $newLog->user_id = $currentUser->id;
+        $newLog->item_list = $text;
+        $newLog->purpose = $request->purpose;
+        $newLog->place = $request->place;
+        $newLog->status = 'PENDING';
+        $newLog->borrow_date = \Carbon\Carbon::parse($request->borrow_date);
+        $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
+        $newLog->save();
+        return redirect('kuru');
+    }
 
-        return view('kuru', compact('kurus'));
-    }
-    public function save(Request $request){
-        $checkedIds = $request->input('checkboxes');
-        dd($request);
-    }
 }
