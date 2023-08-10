@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('staff')->middleware(['staff'])->group(function () {
+    Route::post('/save-kuru', [App\Http\Controllers\KuruController::class, 'savekuru'])->name('addone');
     Route::get('/download-excel', [App\Http\Controllers\KuruController::class, 'download'])->name('download.excel');
     Route::post('/kuru/addfromfile', [App\Http\Controllers\KuruController::class, 'addfromfile'])->name('addfromfile');
     Route::view('edit', 'staff.edititem');

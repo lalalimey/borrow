@@ -111,4 +111,22 @@ class KuruController extends Controller
         }
     }
 
+    public function savekuru(Request $request)
+    {
+        // Retrieve form data
+        $newkuru = new KuruModel();
+        $newkuru->number = $request->input('number');
+        $newkuru->name = $request->input('name');
+        $newkuru->division = $request->input('division');
+        $newkuru->storage = $request->input('storage');
+        $newkuru->budget = $request->input('budget');
+        $newkuru->year = $request->input('year');
+        $newkuru->save();
+
+        // Perform any actions, such as saving to a database
+        // ...
+
+        return redirect()->back()->with('success', 'Data saved successfully.');
+    }
+
 }

@@ -20,7 +20,8 @@
                 <p>เหมาะสำหรับการเพิ่มครุภัณฑ์จำนวนไม่มาก สามารถทำได้อย่างรวดเร็ว</p>
                 <div class="container m-2">
                     <h3>ข้อมูลครุภัณฑ์</h3>
-                    <form>
+                    <form action="{{ route('addone') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="number">Number:</label>
                             <input type="text" class="form-control" id="number" name="number" required>
