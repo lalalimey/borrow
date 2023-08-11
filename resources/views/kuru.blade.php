@@ -33,53 +33,55 @@
                     borrow
                 </button>
                 @if(Auth::user()->status == 'STAFF')
-                    <a href="staff/kuru/add"><button type="button" class="btn btn-primary">เพิ่มครุภัณฑ์</button></a>
+                    <a href="{{route('addkuru')}}"><button type="button" class="btn btn-primary">เพิ่มครุภัณฑ์</button></a>
                 @endif
             </div>
         </div>
         <div class="row justify-content-center">
-            <table class="table align-middle" id="itemTable">
-                <thead>
-                <tr>
-                    <th scope="col"><a href="/kuru/id" class="text-dark text-decoration-none" id="sortbyid-link">id</a></th>
-                    <th scope="col" id="mainTableHeadName"><a href="/kuru/name" class="text-dark text-decoration-none" id="sortbyid-name">ชื่อ</a></th>
-                    <th scope="col">ฝ่าย</th>
-                    <th scope="col">สถานที่</th>
-                    <th scope="col">งบ</th>
-                    <th scope="col"><a href="/kuru/year" class="text-dark text-decoration-none" id="sortbyid-year">ปีที่เบิก</a></th>
-                    <th scope="col">สถานะ</th>
-                    <th class="fit"></th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($kurus as $kuru)
-                    <tr class="mainList">
-                        <td>{{ $kuru->number }}</td>
-                        <td>{{ $kuru->name }}</td>
-                        <td>{{ $kuru->division }}</td>
-                        <td>{{ $kuru->storage }}</td>
-                        <td>{{ $kuru->budget }}</td>
-                        <td>{{ $kuru->year }}</td>
-                        @if($kuru->status == 'normal')
-                            <td>{{ $kuru->status }}</td>
-                        @elseif($kuru->status == 'pending')
-                            <td><span class="text-secondary">{{ $kuru->status }}</span></td>
-                        @elseif($kuru->status == 'broken')
-                            <td><span class="text-danger">{{ $kuru->status }}</span></td>
-                        @elseif($kuru->status == 'borrowed')
-                            <td><span class="text-primary">{{ $kuru->status }}</span></td>
-                        @endif
-                        <td>
-                            @if($kuru->status == 'normal')
-                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}">
-                            @else
-                                <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}" disabled>
-                            @endif
-                        </td>
+            <div class="scrollable-div" style="height: 65vh; width: 100vw; overflow-y: auto;">
+                <table class="table align-middle" id="itemTable">
+                    <thead>
+                    <tr>
+                        <th scope="col"><a href="/kuru/id" class="text-dark text-decoration-none" id="sortbyid-link">id</a></th>
+                        <th scope="col" id="mainTableHeadName"><a href="/kuru/name" class="text-dark text-decoration-none" id="sortbyid-name">ชื่อ</a></th>
+                        <th scope="col">ฝ่าย</th>
+                        <th scope="col">สถานที่</th>
+                        <th scope="col">งบ</th>
+                        <th scope="col"><a href="/kuru/year" class="text-dark text-decoration-none" id="sortbyid-year">ปีที่เบิก</a></th>
+                        <th scope="col">สถานะ</th>
+                        <th class="fit"></th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($kurus as $kuru)
+                        <tr class="mainList">
+                            <td>{{ $kuru->number }}</td>
+                            <td>{{ $kuru->name }}</td>
+                            <td>{{ $kuru->division }}</td>
+                            <td>{{ $kuru->storage }}</td>
+                            <td>{{ $kuru->budget }}</td>
+                            <td>{{ $kuru->year }}</td>
+                            @if($kuru->status == 'normal')
+                                <td>{{ $kuru->status }}</td>
+                            @elseif($kuru->status == 'pending')
+                                <td><span class="text-secondary">{{ $kuru->status }}</span></td>
+                            @elseif($kuru->status == 'broken')
+                                <td><span class="text-danger">{{ $kuru->status }}</span></td>
+                            @elseif($kuru->status == 'borrowed')
+                                <td><span class="text-primary">{{ $kuru->status }}</span></td>
+                            @endif
+                            <td>
+                                @if($kuru->status == 'normal')
+                                    <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}">
+                                @else
+                                    <input type="checkbox" class="item-checkbox" name="selected_items[]" value="{{ $kuru->number }}" disabled>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
