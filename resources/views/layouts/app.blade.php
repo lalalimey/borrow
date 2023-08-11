@@ -57,6 +57,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('staff/logmonitor') ? 'active' : '' }}" href="/staff/logmonitor">ยืนยันการทำรายการ</a>
                         </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('staff/kurulogmonitor') ? 'active' : '' }}" href="/staff/kurulogmonitor">ยืนยันการทำรายการครุภัณฑ์</a>
+                            </li>
                         @endcan
 
                         {{-- <li class="nav-item">

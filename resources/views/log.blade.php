@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            
+
                     <div class="d-flex flex-row-reverse">
                         {{-- <button type="button" class="btn btn-primary mx-2" id="buttonCheckout" data-bs-toggle="modal" data-bs-target="#checkoutModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" style="pointer-events: none">
@@ -18,8 +18,8 @@
                             <input type="text" class="form-control" id="itemNameInput" onkeyup="searchItem()" placeholder="ค้นหาด้วยชื่อ">
                         </div>
                     </div>
-                    
-            
+
+
             <table class="table align-middle" id="itemTable">
                 <thead>
                     <tr>
@@ -56,9 +56,9 @@
                                 @if ($log->status == 'PENDING')
                                 <button type="button" class="btn btn-danger float-end" id="{{ 'buttonCancelModal' .  $log->id }}" data-bs-toggle="modal" data-bs-target="#cancelModal">
                                     ยกเลิก
-                                </button> 
+                                </button>
                                 @endif
-                                
+
                             </td>
                         </tr>
                         @php
@@ -138,7 +138,7 @@
             let innerHTMLofItemList = '';
             let innerHTMLofConditions = '';
             for (const id in itemInfoListforThisLog) {
-                
+
                 innerHTMLofItemList += `<tr>
                     <td>${id}</td>
                     <td>${itemInfoList[id][0]}</td>
@@ -193,7 +193,7 @@
         XHR.open( 'POST', '/log/delete' );
 
         // Add the required HTTP header for form data POST requests
-        XHR.setRequestHeader("x-csrf-token", document.querySelector('meta[name="csrf-token"]').getAttribute('content'));   
+        XHR.setRequestHeader("x-csrf-token", document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
         XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 
         // Finally, send our data.
