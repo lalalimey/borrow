@@ -9,5 +9,5 @@ class KuruModel extends Model
 {
     protected $table = 'kuru';
     protected $primaryKey = 'id';
-    protected $fillable = ['number','name','division','storage','budget','year','status','checkup'];
+    protected $fillable = ['number','name','division','storage','budget','year','status','checkup','contact','user_id'];
 }

@@ -45,7 +45,7 @@
                             <a class="nav-link {{ (request()->is('home')) ? 'active' : '' }}" aria-current="page" href="/home">ระบบยืมวัสดุ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('kuru')) ? 'active' : '' }}" aria-current="page" href="/kuru">ระบบครุภัณฑ์</a>
+                            <a class="nav-link {{ (request()->is('kuru/*')) ? 'active' : '' }}" aria-current="page" href="/kuru/id">ระบบครุภัณฑ์</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('log')) ? 'active' : '' }}" href="/log">ประวัติการทำรายการ</a>

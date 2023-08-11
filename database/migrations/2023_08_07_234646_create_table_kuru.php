@@ -23,6 +23,8 @@ class CreateTableKuru extends Migration
             $table->integer('year');
             $table->enum('status', ['normal', 'pending', 'borrowed', 'broken'])->default('normal');
             $table->date('checkup')->nullable();
+            $table->string('contact')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

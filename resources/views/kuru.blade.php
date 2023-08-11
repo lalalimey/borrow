@@ -1,6 +1,29 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        @if(session('error'))
+            <div class="alert alert-danger" id="alertmass">
+                {{ session('error') }}
+            </div>
+            <script>
+                // Automatically hide the success message after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    document.getElementById('alertmass').style.display = 'none';
+                }, 4000); // Change the time as needed
+            </script>
+        @endif
+        @if(session('success'))
+            <div class="alert alert-success" id="success-message">
+                {{ session('success') }}
+            </div>
+            <script>
+                // Automatically hide the success message after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 4000); // Change the time as needed
+            </script>
+        @endif
+
         <input type="text" class="form-control" id="itemNameInput" onkeyup="searchItem()" placeholder="Search items...">
         <br>
         <div class="flex-reverse mb-3">
@@ -18,12 +41,12 @@
             <table class="table align-middle" id="itemTable">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col" id="mainTableHeadName">ชื่อ</th>
+                    <th scope="col"><a href="/kuru/id" class="text-dark text-decoration-none" id="sortbyid-link">id</a></th>
+                    <th scope="col" id="mainTableHeadName"><a href="/kuru/name" class="text-dark text-decoration-none" id="sortbyid-name">ชื่อ</a></th>
                     <th scope="col">ฝ่าย</th>
                     <th scope="col">สถานที่</th>
                     <th scope="col">งบ</th>
-                    <th scope="col">ปีที่เบิก</th>
+                    <th scope="col"><a href="/kuru/year" class="text-dark text-decoration-none" id="sortbyid-year">ปีที่เบิก</a></th>
                     <th scope="col">สถานะ</th>
                     <th class="fit"></th>
                 </tr>
@@ -62,6 +85,7 @@
 
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,67 +97,69 @@
                     <ul id="selectedItemsList">
                         <!-- Selected item details will be added dynamically here -->
                     </ul>
+                    <hr>
                     <form action="{{ route('save') }}" method="post">
                         @csrf
                         <div class="m-3">
+                            <div class="mb-3 row">
+                                <label for="year" class="col-sm-4 col-form-label" >การดำเนินการ:</label>
+                                <div class="col-sm-8">
+                                    <select  class="form-select" name="process" id="process" onchange="toggleInputField()" required>
+                                        <option selected='selected' value="1">ยืม</option>
+                                        @if(Auth::user()->status == 'STAFF')
+                                            <option value="2">แจ้งซ่อม</option>
+                                            <option value="3">checkup</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="purposeTextArea" class="form-label">จุดประสงค์:</label>
                                 <textarea class="form-control" name="purpose" id="purposeTextArea" rows="3" value="" required></textarea>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="place" class="col-sm-4 col-form-label">สถานที่ใช้งาน:</label>
-                                <div class="col-sm-8">
-                                    <input id="place" class="form-control" name="place" value="" required>
-                                    <input id="list" class="form-control" name="list" style="display: none" required>
+                            <div id="noshow">
+                                <div class="mb-3 row">
+                                    <label for="place" class="col-sm-4 col-form-label">สถานที่ใช้งาน:</label>
+                                    <div class="col-sm-8">
+                                        <input id="place" class="form-control" name="place" value="" required>
+                                        <input id="list" class="form-control" name="list" style="display: none" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="start_date" class="col-sm-4 col-form-label">วันที่ยืม:</label>
-                                <div class="col-sm-8">
-                                    <input id="start_date" class="form-control" name="start_date" value="" required>
+                                <div class="mb-3 row">
+                                    <label for="start_date" class="col-sm-4 col-form-label">วันที่ยืม:</label>
+                                    <div class="col-sm-8">
+                                        <input id="start_date" class="form-control" name="start_date" value="" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="due_date" class="col-sm-4 col-form-label">วันที่คืน:</label>
-                                <div class="col-sm-8">
-                                    <input id="due_date" class="form-control" name="due_date" value="">
+                                <div class=" row">
+                                    <label for="due_date" class="col-sm-4 col-form-label">วันที่คืน:</label>
+                                    <div class="col-sm-8">
+                                        <input id="due_date" class="form-control" name="due_date" value="" disabled required>
+                                        <p>ยืมครุภัณฑ์ได้ไม่เกิน 14 วัน</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <h6 class="pt-1">ข้อมูลสำหรับการติดต่อ</h6>
-                            <div class="mb-3 row">
-                                <label for="nickname" class="col-sm-4 col-form-label">ชื่อเล่น:</label>
-                                <div class="col-sm-8">
-                                    <input id="nickname" class="form-control" name="nickname" value="{{ Auth::user()->nickname ? Auth::user()->nickname : '' }}">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="year" class="col-sm-4 col-form-label" >ชั้นปีที่:</label>
-                                <div class="col-sm-8">
-                                    <select  class="form-select" name="year" id="year" required>
-                                        <option selected='selected' value="">--เลือก--</option>
-                                        <option value="1">1 (MDCU78)</option>
-                                        <option value="2">2 (MDCU77)</option>
-                                        <option value="3">3 (MDCU76)</option>
-                                        <option value="4">4 (MDCU75)</option>
-                                        <option value="5">5 (MDCU74)</option>
-                                        <option value="6">6 (MDCU73)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="phone" class="col-sm-4 col-form-label">เบอร์โทรศัพท์มือถือ:</label>
-                                <div class="col-sm-8">
-                                    <input id="phone" class="form-control" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" required>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="line_id" class="col-sm-4 col-form-label">Line id:</label>
-                                <div class="col-sm-8">
-                                    <input id="line_id" class="form-control" name="line_id" value="{{ Auth::user()->line_id ? Auth::user()->line_id : '' }}" required>
+                                <h6 class="pt-1">ข้อมูลสำหรับการติดต่อ</h6>
+                                <div class="mb-3 row">
+                                    <label for="phone" class="col-sm-4 col-form-label">เบอร์โทรศัพท์มือถือ หรือ ช่องทางติดต่อที่สะดวก:</label>
+                                    <div class="col-sm-8">
+                                        <input id="phone" class="form-control" name="phone" value="{{ Auth::user()->phone ? Auth::user()->phone : '' }}" required>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <script>
+                        function toggleInputField() {
+                            var choice = document.getElementById('process').value;
+                            var inputField = document.getElementById('noshow');
+
+                            if (choice === 'ยืม') {
+                                inputField.style.display = 'block';
+                            } else {
+                                inputField.style.display = 'none';
+                            }
+                        }
+                    </script>
                 </div>
 
                 <div class="modal-footer">
@@ -147,6 +173,24 @@
 
 @section('script')
     <script>
+        var linkElement = document.getElementById("sortbyid-link");
+
+        // Check if the current URL matches the desired condition
+        if (window.location.pathname === "/kuru/id") {
+            // Update the link's content with SVG and text
+            linkElement.innerHTML = 'id <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+        }
+        var linkElement1 = document.getElementById("sortbyid-name");
+        if (window.location.pathname === "/kuru/name") {
+            // Update the link's content with SVG and text
+            linkElement1.innerHTML = 'ชื่อ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+        }
+        var linkElement2 = document.getElementById("sortbyid-year");
+        if (window.location.pathname === "/kuru/year") {
+            // Update the link's content with SVG and text
+            linkElement2.innerHTML = 'ปีที่เบิก <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>';
+        }
+
         $(document).ready(function() {
             $('#submitBtn').on('click', function() {
                 var form = $('#checkoutModal').find('form');
@@ -157,19 +201,38 @@
         });
 
         $(document).ready(function () {
-            $('#start_date').datepicker({
+            var startDatePicker = $('#start_date').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startDate: new Date() // Set the start date to today
             });
-        });
-        $(document).ready(function () {
-            $('#due_date').datepicker({
+
+            var dueDatePicker = $('#due_date').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startDate: new Date() // Set the start date to today
+            });
+
+            startDatePicker.on('changeDate', function (e) {
+                var selectedStartDate = e.date;
+                var maxDueDate = new Date(selectedStartDate);
+                maxDueDate.setDate(maxDueDate.getDate() + 14); // 14 days after start_date
+
+                // Check if the current due_date is less than 14 days after the new start_date
+                if (dueDatePicker.datepicker('getDate') < maxDueDate) {
+                    dueDatePicker.datepicker('setDate', maxDueDate);
+                }
+
+                // Enable due_date field and set date range based on start_date
+                dueDatePicker.prop('disabled', false);
+                dueDatePicker.datepicker('setStartDate', selectedStartDate);
+                dueDatePicker.datepicker('setEndDate', maxDueDate);
             });
         });
+
+
         function searchItem() {
             // Declare variables
             let input, filter, table, tr, td, i, txtValue, nm, nmValue;

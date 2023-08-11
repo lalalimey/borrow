@@ -29,39 +29,70 @@ class KuruController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($by)
     {
         // Retrieve all items from the database (assuming $kurus is a collection)
-        $kurus = KuruModel::all();
+        $kurus = KuruModel::orderBy($by)->get();
 
         return view('kuru', compact('kurus'));
     }
 
     public function save(Request $request)
     {
+        if ($request->list == null){
+            return redirect('kuru')->with('error','please select at least one item');
+        }
         $text = $request->input('list');
         $lists = explode(', ', $text);
-        foreach ($lists as $list) {
-            $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
+        if ($request->process == '1'){
+            $validator = Validator::make($request->all(), [
+                'place' => 'required',
+                'purpose' => 'required',
+                'start_date' => 'required',
+                'due_date' => 'required',
+                'phone' => 'required',
+                // Add validation rules for other fields
+            ]);
+            if ($validator->fails()) {
+                return redirect('kuru')->with('error','please fill all input box');
+            }
+            $currentUser = Auth::user();
+            foreach ($lists as $list) {
+                $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
 
-            if ($kuru) {
-                $kuru->update(['status' => 'pending']);
-            } else {
-                // Print a message for debugging
-                echo "No record found for list: $list";
+                if ($kuru) {
+                    $kuru->update(['status' => 'pending']);
+                    $kuru->update(['contact' => $request->phone]);
+                    $kuru->update(['user_id' => $currentUser->id]);
+                } else {
+                    // Print a message for debugging
+                    echo "No record found for list: $list";
+                }
+            }
+            $newLog = new Kuru_logModal();
+            $newLog->user_id = $currentUser->id;
+            $newLog->item_list = $text;
+            $newLog->purpose = $request->purpose;
+            $newLog->place = $request->place;
+            $newLog->status = 'PENDING';
+            $newLog->borrow_date = \Carbon\Carbon::parse($request->start_date);
+            $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
+            $newLog->save();
+            return redirect('kuru')->with('success', 'Data saved successfully.');
+        } elseif ($request->process == '2'){
+            foreach ($lists as $list) {
+                $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
+
+                if ($kuru) {
+                    $kuru->update(['status' => 'broken']);
+                } else {
+                    // Print a message for debugging
+                    echo "No record found for list: $list";
+                }
             }
         }
-        $currentUser = Auth::user();
-        $newLog = new Kuru_logModal();
-        $newLog->user_id = $currentUser->id;
-        $newLog->item_list = $text;
-        $newLog->purpose = $request->purpose;
-        $newLog->place = $request->place;
-        $newLog->status = 'PENDING';
-        $newLog->borrow_date = \Carbon\Carbon::parse($request->borrow_date);
-        $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
-        $newLog->save();
-        return redirect('kuru');
+
+
     }
 
 
