@@ -77,8 +77,9 @@ class KuruController extends Controller
             $newLog->status = 'PENDING';
             $newLog->borrow_date = \Carbon\Carbon::parse($request->start_date);
             $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
+            $newLog->tel = $request->phone;
             $newLog->save();
-            return redirect('kuru')->with('success', 'Data saved successfully.');
+            return redirect('kuru/id')->with('success', 'Data saved successfully.');
         } elseif ($request->process == '2'){
             foreach ($lists as $list) {
                 $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
@@ -157,7 +158,10 @@ class KuruController extends Controller
         // Perform any actions, such as saving to a database
         // ...
 
-        return redirect()->back()->with('success', 'Data saved successfully.');
+        return redirect()->back()->with('succes    public function processlog($id){
+
+    }s', 'Data saved successfully.');
     }
+
 
 }

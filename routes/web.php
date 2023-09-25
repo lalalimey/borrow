@@ -43,5 +43,8 @@ Route::prefix('staff')->middleware(['staff'])->group(function () {
     Route::post('edit', 'App\Http\Controllers\ItemsController@updateItemInfo');
     Route::view('logmonitor', 'staff.approvelog');
     Route::view('kurulogmonitor', 'staff.approvekurulog');
+    Route::get('kurulogmonitor/{id}',function ($id){
+        return view('staff.kurulogdetail',['id'=>$id]);
+    });
     Route::post('logmonitor/approve', 'App\Http\Controllers\LogsController@approveLog');
 });

@@ -4,11 +4,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
-                <div class="d-flex flex-row-reverse">
-                    <div class="col-xs-3">
-                        <input type="text" class="form-control" id="itemNameInput" onkeyup="searchItem()" placeholder="ค้นหาด้วยชื่อ">
-                    </div>
-                </div>
                 <h2>การยืมครุภัณฑ์</h2>
                 <table class="table align-middle" id="itemTable">
                     <thead>
@@ -22,7 +17,6 @@
                         <th style="display: none">ชั้นปี</th>
                         <th style="display: none">ID Line</th>
                         <th style="display: none">เบอร์โทรศัพท์มือถือ</th>
-                        <th scope="col" class="fit"></th>
                         <th scope="col" class="fit"></th>
                     </tr>
                     </thead>
@@ -41,25 +35,12 @@
                             <td scope="col">{{ $log->purpose }}</td>
                             <td class="fit">{{ $log->borrow_date }}</td>
                             <td class="fit">{{ $log->due_date }}</td>
-                            <td class="fit">{{ $log->status }}</td>
+                            <td class="fit"><a href="/staff/kurulogmonitor/{{$log->id}}">{{ $log->status }}</a></td>
                             <td style="display: none">{{$user->name}} ({{ $user->nickname ? $user->nickname : '' }})</td>
                             <td style="display: none">{{$user->year}}</td>
-                            <td style="display: none">{{$user->line_id}}</td>
-                            <td style="display: none">{{$user->phone}}</td>
-{{--                            <td class="fit">--}}
-
-{{--                                <button type="button" class="btn btn-outline float-end" id="{{ 'buttonInfoModal' .  $log->id }}" data-bs-toggle="modal" data-bs-target="#infoModal">--}}
-{{--                                    รายละเอียด--}}
-{{--                                </button>--}}
-{{--                            </td>--}}
-{{--                            <td class="fit">--}}
-{{--                                @if ($log->status == 'PENDING' || $log->status == 'BORROWED')--}}
-{{--                                    <button type="button" class="btn btn-primary float-end" id="{{ 'buttonApproveModal' .  $log->id }}" data-bs-toggle="modal" data-bs-target="#approveModal">--}}
-{{--                                        ยืนยัน--}}
-{{--                                    </button>--}}
-{{--                                @endif--}}
-
-{{--                            </td>--}}
+                            <td class="fit">
+                                <button class="btn btn-primary detail-button" data-log-id="{{ $log->id }}">Detail</button>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -69,5 +50,20 @@
     </div>
 @endsection
 @section('script')
+    <script>
+        $(document).ready(function() {
+            // Add a click event handler for the detail buttons
+            $('.detail-button').on('click', function() {
+                // Get the log ID from the custom data attribute
+                var logId = $(this).data('log-id');
+
+                // Construct the URL for the detail page
+                var detailUrl = '/staff/kurulogmonitor/' + logId;
+
+                // Navigate to the detail page
+                window.location.href = detailUrl;
+            });
+        });
+    </script>
 
 @endsection
