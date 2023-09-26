@@ -92,10 +92,24 @@ class KuruController extends Controller
                 }
             }
         }
-
-
     }
 
+
+    public function approve(Request $request)
+    {
+        $id = $request->input('id');
+        $kuru = KuruModel::where('number', $id)->first();
+        $kuru->update(['status' => 'borrowed']);
+        return redirect()->back(); // Redirect back after handling the value
+    }
+
+    public function returned(Request $request)
+    {
+        $id = $request->input('id');
+        $kuru = KuruModel::where('number', $id)->first();
+        $kuru->update(['status' => 'normal']);
+        return redirect()->back(); // Redirect back after handling the value
+    }
 
     public function addfromfile(Request $request){
         $validator = Validator::make($request->all(), [

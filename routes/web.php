@@ -46,5 +46,7 @@ Route::prefix('staff')->middleware(['staff'])->group(function () {
     Route::get('kurulogmonitor/{id}',function ($id){
         return view('staff.kurulogdetail',['id'=>$id]);
     });
+    Route::get('approve',[App\Http\Controllers\KuruController::class, 'approve'])->name('approve');
+    Route::get('returned',[App\Http\Controllers\KuruController::class, 'returned'])->name('returned');
     Route::post('logmonitor/approve', 'App\Http\Controllers\LogsController@approveLog');
 });

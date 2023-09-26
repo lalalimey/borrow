@@ -44,9 +44,11 @@
                                 <th scope="col">name</th>
                                 <th scope="col">status</th>
                                 <th scope="col">ฝ่าย</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($lists as $item)
                                 @php($itemused = KuruModel::where('number',$item)->first())
                                 <tr>
@@ -54,6 +56,15 @@
                                     <td>{{$itemused->name}}</td>
                                     <td>{{$itemused->status}}</td>
                                     <td>{{$itemused->division}}</td>
+                                    <td>
+                                        @if($itemused->status == 'pending')
+                                            <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number]) }}">approve</a>
+                                        @elseif($itemused->status == 'borrowed')
+                                            <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number]) }}">returned</a>
+                                        @elseif($itemused->status == 'normal')
+                                            <p class="text-success">complete</p>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
