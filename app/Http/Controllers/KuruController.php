@@ -57,18 +57,7 @@ class KuruController extends Controller
                 return redirect('kuru')->with('error','please fill all input box');
             }
             $currentUser = Auth::user();
-            foreach ($lists as $list) {
-                $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
 
-                if ($kuru) {
-                    $kuru->update(['status' => 'pending']);
-                    $kuru->update(['contact' => $request->phone]);
-                    $kuru->update(['user_id' => $currentUser->id]);
-                } else {
-                    // Print a message for debugging
-                    echo "No record found for list: $list";
-                }
-            }
             $newLog = new Kuru_logModal();
             $newLog->user_id = $currentUser->id;
             $newLog->item_list = $text;
@@ -79,6 +68,12 @@ class KuruController extends Controller
             $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
             $newLog->tel = $request->phone;
             $newLog->save();
+            foreach ($lists as $list) {
+                $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
+                $kuru->update(['status' => 'pending']);
+                $kuru->logid = $newLog->id;
+                $kuru->save();
+            }
             return redirect('kuru/id')->with('success', 'Data saved successfully.');
         } elseif ($request->process == '2'){
             foreach ($lists as $list) {
@@ -98,16 +93,31 @@ class KuruController extends Controller
     public function approve(Request $request)
     {
         $id = $request->input('id');
+        $logid = $request->input('logid');
         $kuru = KuruModel::where('number', $id)->first();
         $kuru->update(['status' => 'borrowed']);
+        $kurulogs = Kuru_logModal::where('id',$logid)->get();
+        $kurulog = $kurulogs[0];
+        $kurulog->status = 'BORROWED';
+        $kurulog->save();
         return redirect()->back(); // Redirect back after handling the value
     }
 
     public function returned(Request $request)
     {
         $id = $request->input('id');
+        $logid = $request->input('logid');
         $kuru = KuruModel::where('number', $id)->first();
         $kuru->update(['status' => 'normal']);
+        $kuru->update(['logid' => null]);
+        $exists = KuruModel::where('logid', $logid)->exists();
+        if ($exists) {
+            // do nothing
+        } else {
+            $kurulog = Kuru_logModal::where('id',$logid)->first();
+            $kurulog->status = 'COMPLETE';
+            $kurulog->save();
+        }
         return redirect()->back(); // Redirect back after handling the value
     }
 

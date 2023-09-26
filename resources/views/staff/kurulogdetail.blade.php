@@ -58,9 +58,9 @@
                                     <td>{{$itemused->division}}</td>
                                     <td>
                                         @if($itemused->status == 'pending')
-                                            <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number]) }}">approve</a>
+                                            <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number,'logid'=>$id]) }}">approve</a>
                                         @elseif($itemused->status == 'borrowed')
-                                            <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number]) }}">returned</a>
+                                            <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number,'logid'=>$id]) }}">returned</a>
                                         @elseif($itemused->status == 'normal')
                                             <p class="text-success">complete</p>
                                         @endif
@@ -69,6 +69,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <a href="/staff/kurulogmonitor" class="btn btn-primary">back</a>
                     </div>
 
                 </div>

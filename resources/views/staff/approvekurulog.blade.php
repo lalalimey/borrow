@@ -22,7 +22,7 @@
                     </thead>
                     @php
                         $conditionList = array();
-                        $logs = \App\Models\Kuru_logModal::get();
+                        $logs = \App\Models\Kuru_logModal::orderBy('id', 'desc')->get();
                     @endphp
                     <tbody>
                     @foreach($logs as $log)
@@ -35,7 +35,7 @@
                             <td scope="col">{{ $log->purpose }}</td>
                             <td class="fit">{{ $log->borrow_date }}</td>
                             <td class="fit">{{ $log->due_date }}</td>
-                            <td class="fit"><a href="/staff/kurulogmonitor/{{$log->id}}">{{ $log->status }}</a></td>
+                            <td class="fit">{{ $log->status }}</td>
                             <td style="display: none">{{$user->name}} ({{ $user->nickname ? $user->nickname : '' }})</td>
                             <td style="display: none">{{$user->year}}</td>
                             <td class="fit">
