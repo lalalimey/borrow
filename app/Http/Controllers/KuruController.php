@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+use Phattarachai\LineNotify\Line;
 use Illuminate\Support\Facades\Session;
 
 class KuruController extends Controller
@@ -74,6 +75,9 @@ class KuruController extends Controller
                 $kuru->logid = $newLog->id;
                 $kuru->save();
             }
+            $line = new Line(env('LINE_NOTIFY_TOKEN_SUPER'));
+            $message = 'now borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+            $line->send($message);
             return redirect('kuru/id')->with('success', 'Data saved successfully.');
         } elseif ($request->process == '2'){
             foreach ($lists as $list) {

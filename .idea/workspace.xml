@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="log for kuru function" />
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="log for kuru function">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/line-notify.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/line-notify.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,6 +149,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="2TfBvLEkEic598d9imVaDk0QxHm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -192,7 +200,8 @@
       <workItem from="1691904500768" duration="2908000" />
       <workItem from="1694696411788" duration="34000" />
       <workItem from="1695656285207" duration="6126000" />
-      <workItem from="1695709987555" duration="14062000" />
+      <workItem from="1695709987555" duration="14209000" />
+      <workItem from="1695726528779" duration="1108000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
