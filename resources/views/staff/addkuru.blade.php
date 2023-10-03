@@ -13,6 +13,17 @@
                 }, 4000); // Change the time as needed
             </script>
         @endif
+            @if(session('error'))
+                <div class="alert alert-danger" id="error-message">
+                    {{ session('error') }}
+                </div>
+                <script>
+                    // Automatically hide the error message after 5 seconds (5000 milliseconds)
+                    setTimeout(function() {
+                        document.getElementById('error-message').style.display = 'none';
+                    }, 6000); // Change the time as needed
+                </script>
+            @endif
         <div class="row">
             <div class="col-md-6">
                 <!-- Content for the first column goes here -->

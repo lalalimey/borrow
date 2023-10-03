@@ -144,18 +144,28 @@ class KuruController extends Controller
 
         // Get the data from the import
         $datas = $excelImport->getData();
+        $skippedNumbers = [];
         foreach ($datas as $data){
-            $newkuru = new KuruModel();
-            $newkuru->number =$data['number'];
-            $newkuru->name =$data['name'];
-            $newkuru->division =$data['division'];
-            $newkuru->storage =$data['storage'];
-            $newkuru->budget =$data['budget'];
-            $newkuru->year =$data['year'];
-            $newkuru->save();
+            $number = $data['number'];
+            $count = KuruModel::where('number', $data['number'])->count();
+            if ($count > 0) {
+                $skippedNumbers[] = $number;
+            } else {
+                $newkuru = new KuruModel();
+                $newkuru->number =$data['number'];
+                $newkuru->name =$data['name'];
+                $newkuru->division =$data['division'];
+                $newkuru->storage =$data['storage'];
+                $newkuru->budget =$data['budget'];
+                $newkuru->year =$data['year'];
+                $newkuru->save();
+            }
         }
-        // Now you can process $data as needed
-
+        if (!empty($skippedNumbers)) {
+            // If there are skipped numbers, redirect back with an error message
+            return redirect()->back()->with('error', 'Some rows were skipped because they already exist in the database. Skipped Numbers: ' . implode(', ', $skippedNumbers));
+        }
+        $skippedNumbers = []; // Reset the skipped numbers array
         return redirect()->back()->with('success', 'Excel file uploaded and added to database.');
     }
 
@@ -174,21 +184,20 @@ class KuruController extends Controller
     public function savekuru(Request $request)
     {
         // Retrieve form data
-        $newkuru = new KuruModel();
-        $newkuru->number = $request->input('number');
-        $newkuru->name = $request->input('name');
-        $newkuru->division = $request->input('division');
-        $newkuru->storage = $request->input('storage');
-        $newkuru->budget = $request->input('budget');
-        $newkuru->year = $request->input('year');
-        $newkuru->save();
-
-        // Perform any actions, such as saving to a database
-        // ...
-
-        return redirect()->back()->with('succes    public function processlog($id){
-
-    }s', 'Data saved successfully.');
+        $count = KuruModel::where('number', $request->input('number'))->count();
+        if ($count > 0) {
+            return redirect()->back()->with('error', 'this id was used.');
+        } else {
+            $newkuru = new KuruModel();
+            $newkuru->number = $request->input('number');
+            $newkuru->name = $request->input('name');
+            $newkuru->division = $request->input('division');
+            $newkuru->storage = $request->input('storage');
+            $newkuru->budget = $request->input('budget');
+            $newkuru->year = $request->input('year');
+            $newkuru->save();
+            return redirect()->back()->with('success', 'Data saved successfully.');
+        }
     }
 
 
