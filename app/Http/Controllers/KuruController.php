@@ -76,20 +76,43 @@ class KuruController extends Controller
                 $kuru->save();
             }
             $line = new Line(env('LINE_NOTIFY_TOKEN_SUPER'));
-            $message = 'now borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+            $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
             $line->send($message);
             return redirect('kuru/id')->with('success', 'Data saved successfully.');
         } elseif ($request->process == '2'){
+            $validator = Validator::make($request->all(), [
+                'place' => 'required',
+                'purpose' => 'required',
+                'start_date' => 'required',
+                'due_date' => 'required',
+                'phone' => 'required',
+                // Add validation rules for other fields
+            ]);
+            if ($validator->fails()) {
+                return redirect('kuru')->with('error','please fill all input box');
+            }
+            $currentUser = Auth::user();
+
+            $newLog = new Kuru_logModal();
+            $newLog->user_id = $currentUser->id;
+            $newLog->item_list = $text;
+            $newLog->purpose = $request->purpose;
+            $newLog->place = $request->place;
+            $newLog->status = 'BROKEN';
+            $newLog->borrow_date = \Carbon\Carbon::parse($request->start_date);
+            $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
+            $newLog->tel = $request->phone;
+            $newLog->save();
             foreach ($lists as $list) {
                 $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
-
-                if ($kuru) {
-                    $kuru->update(['status' => 'broken']);
-                } else {
-                    // Print a message for debugging
-                    echo "No record found for list: $list";
-                }
+                $kuru->update(['status' => 'broken']);
+                $kuru->logid = $newLog->id;
+                $kuru->save();
             }
+            $line = new Line(env('LINE_NOTIFY_TOKEN_SUPER'));
+            $message = 'new broken reported please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+            $line->send($message);
+            return redirect('kuru/id')->with('success', 'Data saved successfully.');
         }
     }
 

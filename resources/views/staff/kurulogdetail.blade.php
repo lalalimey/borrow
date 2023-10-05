@@ -57,12 +57,30 @@
                                     <td>{{$itemused->status}}</td>
                                     <td>{{$itemused->division}}</td>
                                     <td>
-                                        @if($itemused->status == 'pending')
-                                            <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number,'logid'=>$id]) }}">approve</a>
-                                        @elseif($itemused->status == 'borrowed')
-                                            <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number,'logid'=>$id]) }}">returned</a>
-                                        @elseif($itemused->status == 'normal')
-                                            <p class="text-success">complete</p>
+                                        @if(Auth::user()->role == 'SUPER')
+                                            @if($itemused->status == 'pending')
+                                                <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number,'logid'=>$id]) }}">approve</a>
+                                            @elseif($itemused->status == 'borrowed')
+                                                <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number,'logid'=>$id]) }}">returned</a>
+                                            @elseif($itemused->status == 'normal')
+                                                <p class="text-success">complete</p>
+                                            @endif
+                                        @elseif(Auth::user()->role == $itemused->division)
+                                            @if($itemused->status == 'pending')
+                                                <a class="btn btn-primary" href="{{route('approve', ['id'=>$itemused->number,'logid'=>$id]) }}">approve</a>
+                                            @elseif($itemused->status == 'borrowed')
+                                                <a class="btn btn-primary" href="{{route('returned', ['id'=>$itemused->number,'logid'=>$id]) }}">returned</a>
+                                            @elseif($itemused->status == 'normal')
+                                                <p class="text-success">complete</p>
+                                            @endif
+                                        @else
+                                            @if($itemused->status == 'pending')
+                                                <button class="btn btn-primary" href="" disabled>approve</button>
+                                            @elseif($itemused->status == 'borrowed')
+                                                <button class="btn btn-primary" href="" disabled>returned</button>
+                                            @elseif($itemused->status == 'normal')
+                                                <p class="text-success">complete</p>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>
