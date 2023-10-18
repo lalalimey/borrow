@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add division role permission">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
-    </list>
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="'broken' bug fixed" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,7 +200,7 @@
       <workItem from="1696312258677" duration="5460000" />
       <workItem from="1696510189570" duration="3707000" />
       <workItem from="1696934078672" duration="13000" />
-      <workItem from="1697619523896" duration="554000" />
+      <workItem from="1697619523896" duration="1061000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
@@ -338,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696511694690</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="'broken' bug fixed">
+      <created>1697620110108</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1697620110108</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,6 +379,7 @@
     <MESSAGE value="add line notify" />
     <MESSAGE value="check if the id of kuru is used or not" />
     <MESSAGE value="add division role permission" />
-    <option name="LAST_COMMIT_MESSAGE" value="add division role permission" />
+    <MESSAGE value="'broken' bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="'broken' bug fixed" />
   </component>
 </project>
