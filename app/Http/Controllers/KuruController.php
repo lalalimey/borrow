@@ -80,16 +80,13 @@ class KuruController extends Controller
             $line->send($message);
             return redirect('kuru/id')->with('success', 'Data saved successfully.');
         } elseif ($request->process == '2'){
+
             $validator = Validator::make($request->all(), [
-                'place' => 'required',
                 'purpose' => 'required',
-                'start_date' => 'required',
-                'due_date' => 'required',
-                'phone' => 'required',
                 // Add validation rules for other fields
             ]);
             if ($validator->fails()) {
-                return redirect('kuru')->with('error','please fill all input box');
+                return redirect('kuru/id')->with('error','please fill all input box');
             }
             $currentUser = Auth::user();
 
@@ -113,6 +110,24 @@ class KuruController extends Controller
             $message = 'new broken reported please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
             $line->send($message);
             return redirect('kuru/id')->with('success', 'Data saved successfully.');
+        } elseif ($request->process == '3'){
+            $validator = Validator::make($request->all(), [
+                'place' => 'required',
+                'purpose' => 'required',
+                'start_date' => 'required',
+                'due_date' => 'required',
+                'phone' => 'required',
+                // Add validation rules for other fields
+            ]);
+            if ($validator->fails()) {
+                return redirect('kuru')->with('error','please fill all input box');
+            }
+            foreach ($lists as $list) {
+                $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
+                $kuru->update(['checkup' => 'broken']);
+                $kuru->save();
+                return redirect('kuru/id')->with('success', 'Data saved successfully.');
+            }
         }
     }
 
