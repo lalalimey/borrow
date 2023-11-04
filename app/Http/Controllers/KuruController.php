@@ -184,6 +184,11 @@ class KuruController extends Controller
         $datas = $excelImport->getData();
         $skippedNumbers = [];
         foreach ($datas as $data){
+            if ($data['number']==null){
+                return redirect()->back()->with('error', 'กรุณากรอกเลขครุภัณฑ์ให้ครบก่อนอัปโหลด' );
+            }
+        }
+        foreach ($datas as $data){
             $number = $data['number'];
             $count = KuruModel::where('number', $data['number'])->count();
             if ($count > 0) {
@@ -196,6 +201,7 @@ class KuruController extends Controller
                 $newkuru->storage =$data['storage'];
                 $newkuru->budget =$data['budget'];
                 $newkuru->year =$data['year'];
+                $newkuru->detail = $data['detail'];
                 $newkuru->save();
             }
         }

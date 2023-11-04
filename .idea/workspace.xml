@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="'broken' bug fixed" />
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add excel file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/KuruModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/KuruModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/template.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/template.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/template.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/template.xlsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -147,18 +153,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/kuru/storage/app/public&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/kuru/public/storage",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\kuru\public\storage" />
       <recent name="D:\kuru\storage\app\public" />
       <recent name="D:\kuru\public\excel" />
       <recent name="D:\kuru" />
@@ -200,7 +207,11 @@
       <workItem from="1696312258677" duration="5460000" />
       <workItem from="1696510189570" duration="3707000" />
       <workItem from="1696934078672" duration="13000" />
-      <workItem from="1697619523896" duration="1061000" />
+      <workItem from="1697619523896" duration="1507000" />
+      <workItem from="1697632100038" duration="1814000" />
+      <workItem from="1697818649426" duration="25000" />
+      <workItem from="1698036420952" duration="885000" />
+      <workItem from="1699067058111" duration="1270000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
@@ -342,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697620110108</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="add excel file">
+      <created>1697620751318</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1697620751318</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,6 +398,7 @@
     <MESSAGE value="check if the id of kuru is used or not" />
     <MESSAGE value="add division role permission" />
     <MESSAGE value="'broken' bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="'broken' bug fixed" />
+    <MESSAGE value="add excel file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add excel file" />
   </component>
 </project>
