@@ -33,7 +33,8 @@
                     borrow
                 </button>
                 @if(Auth::user()->status == 'STAFF')
-                    <a href="{{route('addkuru')}}"><button type="button" class="btn btn-primary">เพิ่มครุภัณฑ์</button></a>
+                    <a href="{{route('addkuru')}}"><button type="button" class="btn btn-primary ms-2">เพิ่มครุภัณฑ์</button></a>
+                    <a href="/staff/kuru/find"><button type="button" class="btn btn-warning">แก้ไขครุภัณฑ์</button></a>
                 @endif
             </div>
         </div>

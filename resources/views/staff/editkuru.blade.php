@@ -79,7 +79,7 @@
                             <label for="number">Detail:</label>
                             <input type="text" class="form-control" name="detail" value="{{ $kuru->detail ?? '' }}" required>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        <button type="submit" class="btn btn-primary mt-2" onclick="return confirm('กรุณาตรวจสอบข้อมูลให้ถูกต้อง หลังจาก update แล้วจะไม่สามารถเรียกคืนข้อมูลเก่าได้')">Submit</button>
                     </form>
                 @else
                     <h2 class="text-center">ไม่พบข้อมูลครุภัณฑ์ที่ท่านทำการค้นหา</h2>

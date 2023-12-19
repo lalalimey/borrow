@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="change template">
-      <change afterPath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" afterDir="false" />
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add edit function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/staff/addkuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/staff/addkuru.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/kuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/kuru.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +213,8 @@
       <workItem from="1699445049695" duration="1127000" />
       <workItem from="1699456078493" duration="22000" />
       <workItem from="1702718320547" duration="735000" />
-      <workItem from="1702985879476" duration="8507000" />
+      <workItem from="1702985879476" duration="8808000" />
+      <workItem from="1702995170853" duration="672000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
@@ -371,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699068444229</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="add edit function">
+      <created>1702994732839</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702994732839</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,6 +417,7 @@
     <MESSAGE value="'broken' bug fixed" />
     <MESSAGE value="add excel file" />
     <MESSAGE value="change template" />
-    <option name="LAST_COMMIT_MESSAGE" value="change template" />
+    <MESSAGE value="add edit function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add edit function" />
   </component>
 </project>
