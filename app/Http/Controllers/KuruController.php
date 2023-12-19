@@ -38,6 +38,40 @@ class KuruController extends Controller
         return view('kuru', compact('kurus'));
     }
 
+    public function findkuru(Request  $request){
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            // Add validation rules for other fields
+        ]);
+        if ($validator->fails()) {
+            return redirect('staff/kuru/find')->with('error','please fill all input box');
+        }
+        $kuru = KuruModel::where('number', 'like', '%' . $request->number . '%')->first();
+        return view('staff.editkuru', compact('kuru'));
+    }
+    public function editkuru(Request $request){
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            'ole_number' => 'required' ,
+            'name' => 'required' ,
+            'division' => 'required' ,
+            'storage' => 'required' ,
+            'budget' => 'required' ,
+            'year' => 'required' ,
+            'detail' => 'required' ,
+        ]);
+        $kuru = KuruModel::where('number', $request->old_number)->first();
+        $kuru->update(['status' => 'normal']);
+        $kuru->update(['number' => $request->number]);
+        $kuru->update(['name' => $request->name]);
+        $kuru->update(['division' => $request->division]);
+        $kuru->update(['storage' => $request->storage]);
+        $kuru->update(['budget' => $request->budget]);
+        $kuru->update(['year' => $request->year]);
+        $kuru->update(['detail' => $request->detail]);
+        return redirect('staff/kuru/find')->with('success', 'Data saved successfully.');
+    }
+
     public function save(Request $request)
     {
         if ($request->list == null){
