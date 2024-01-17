@@ -49,6 +49,14 @@ class KuruController extends Controller
         $kuru = KuruModel::where('number', 'like', '%' . $request->number . '%')->first();
         return view('staff.editkuru', compact('kuru'));
     }
+    public function deletekuru(Request $request){
+        $validator = Validator::make($request->all(), [
+            'ole_number' => 'required' ,
+        ]);
+        $kuru = KuruModel::where('number', $request->old_number)->first();
+        $kuru->delete();
+        return redirect('staff/kuru/find')->with('success', 'Data deleted successfully.');
+    }
     public function editkuru(Request $request){
         $validator = Validator::make($request->all(), [
             'number' => 'required',
@@ -140,7 +148,7 @@ class KuruController extends Controller
                 $kuru->logid = $newLog->id;
                 $kuru->save();
             }
-            $line = new Line(env('LINE_NOTIFY_TOKEN_SUPER'));
+            $line = new Line(env('LINE_NOTIFY_TOKEN2'));
             $message = 'new broken reported please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
             $line->send($message);
             return redirect('kuru/id')->with('success', 'Data saved successfully.');

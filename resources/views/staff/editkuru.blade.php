@@ -81,6 +81,13 @@
                         </div>
                         <button type="submit" class="btn btn-primary mt-2" onclick="return confirm('กรุณาตรวจสอบข้อมูลให้ถูกต้อง หลังจาก update แล้วจะไม่สามารถเรียกคืนข้อมูลเก่าได้')">Submit</button>
                     </form>
+                    <form action="{{ route('deletekuru') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="old_number" value="{{ $kuru->number ?? '' }}" required hidden>
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('this item will permanently delete')">delete item</button>
+                    </form>
                 @else
                     <h2 class="text-center">ไม่พบข้อมูลครุภัณฑ์ที่ท่านทำการค้นหา</h2>
                 @endif

@@ -52,5 +52,6 @@ Route::prefix('staff')->middleware(['staff'])->group(function () {
     Route::post('logmonitor/approve', 'App\Http\Controllers\LogsController@approveLog');
     Route::post('/findkuru', [App\Http\Controllers\KuruController::class, 'findkuru'])->name('findkuru');
     Route::post('/editkuru', [App\Http\Controllers\KuruController::class, 'editkuru'])->name('editkuru');
+    Route::post('/deletekuru', [App\Http\Controllers\KuruController::class, 'deletekuru'])->name('deletekuru');
 
 });

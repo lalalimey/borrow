@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add edit button">
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add detail to add one function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/staff/addkuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/staff/addkuru.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +218,7 @@
       <workItem from="1702995170853" duration="881000" />
       <workItem from="1704601497912" duration="15000" />
       <workItem from="1705479848728" duration="345000" />
-      <workItem from="1705493699429" duration="2358000" />
+      <workItem from="1705493699429" duration="3880000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
@@ -387,7 +388,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702995920101</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add detail to add one function">
+      <created>1705496533727</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1705496533727</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,6 +437,7 @@
     <MESSAGE value="change template" />
     <MESSAGE value="add edit function" />
     <MESSAGE value="add edit button" />
-    <option name="LAST_COMMIT_MESSAGE" value="add edit button" />
+    <MESSAGE value="add detail to add one function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add detail to add one function" />
   </component>
 </project>
