@@ -57,6 +57,10 @@
                             <label for="year">Year:</label>
                             <input type="text" class="form-control" id="year" name="year" required>
                         </div>
+                        <div class="form-group">
+                            <label for="detail">Detail:</label>
+                            <input type="text" class="form-control" id="detail" name="detail">
+                        </div>
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>

@@ -273,6 +273,7 @@ class KuruController extends Controller
             $newkuru->storage = $request->input('storage');
             $newkuru->budget = $request->input('budget');
             $newkuru->year = $request->input('year');
+            $newkuru->detail = $request->input('detail');
             $newkuru->save();
             return redirect()->back()->with('success', 'Data saved successfully.');
         }
