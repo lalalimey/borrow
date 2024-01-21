@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add detail to add one function">
+    <list default="true" id="3d7373d1-7141-434a-93fd-5c7675564493" name="Changes" comment="add delete item function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KuruController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/staff/editkuru.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +216,9 @@
       <workItem from="1702995170853" duration="881000" />
       <workItem from="1704601497912" duration="15000" />
       <workItem from="1705479848728" duration="345000" />
-      <workItem from="1705493699429" duration="3880000" />
+      <workItem from="1705493699429" duration="6808000" />
+      <workItem from="1705835784428" duration="4756000" />
+      <workItem from="1705844937683" duration="4764000" />
     </task>
     <task id="LOCAL-00001" summary="add kuru to layout">
       <created>1691425153094</created>
@@ -395,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705496533727</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add delete item function">
+      <created>1705498016108</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1705498016108</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +420,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add kuru to layout" />
     <MESSAGE value="add kuru database" />
     <MESSAGE value="edit kuru page" />
     <MESSAGE value="sync checkbox when search" />
@@ -438,6 +444,7 @@
     <MESSAGE value="add edit function" />
     <MESSAGE value="add edit button" />
     <MESSAGE value="add detail to add one function" />
-    <option name="LAST_COMMIT_MESSAGE" value="add detail to add one function" />
+    <MESSAGE value="add delete item function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add delete item function" />
   </component>
 </project>

@@ -111,12 +111,76 @@ class KuruController extends Controller
             $newLog->due_date = \Carbon\Carbon::parse($request->due_date);
             $newLog->tel = $request->phone;
             $newLog->save();
+            $division = [];
             foreach ($lists as $list) {
                 $kuru = KuruModel::where('number', 'like', '%' . $list . '%')->first();
                 $kuru->update(['status' => 'pending']);
+                array_push($division, $kuru->division);
                 $kuru->logid = $newLog->id;
                 $kuru->save();
             }
+            $division = array_unique($division);
+            foreach ($division as $divis){
+                if ($divis == "ฝ่ายศิลปวัฒนธรรม"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_ART_AND_CULTURE'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ฝ่ายพัฒน์ ฯ"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_SOCIAL_DEV'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ฝ่ายวิชาการ สพจ."){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_ACADEMIC'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "IT"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_IT'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ฝ่ายถ่ายภาพและสื่อประสม"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_PHOTO'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "วินัยและนิสิตสัมพันธ์"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_STUDENT_RELATION'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ชมรมขับร้องประสานเสียง"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_CHORUS'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ส่งเสริมคุณภาพชีวิต"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_WELFARE'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ชมรมดนตรีฯ"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_MUSIC'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "สพจ." or "Syringe"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_SYRING'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ศานติธรรม"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_SHANTIDHARMA'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ชมรมทำอาหาร"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_COOKING'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "วิเทศสัมพันธ์"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_IR'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }elseif ($divis == "ฝ่ายกีฬาและส่งเสริมสุขภาพ"){
+                    $line = new Line(env('LINE_NOTIFY_TOKEN_SPORT'));
+                    $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
+                    $line->send($message);
+                }
+            }
+
+
             $line = new Line(env('LINE_NOTIFY_TOKEN_SUPER'));
             $message = 'new borrow request please check at https://borrow.docchula.com/staff/kurulogmonitor/'.$newLog->id ;
             $line->send($message);
